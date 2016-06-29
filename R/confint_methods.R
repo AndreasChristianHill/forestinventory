@@ -16,8 +16,8 @@
 #'
 #' \code{\link{onephase}}:
 #'
-#' Two-sided confidence intervals are computed based on the quantiles of the
-#' standard normal distribution.
+#' Two-sided confidence intervals are computed based on the t-distribution with \code{n2 - p} \emph{degrees of freedom},
+#' where \code{n2} is the number of terrestrial data in the respective inventory domain.
 #'
 #' \code{\link{twophase}}:
 #'
@@ -134,12 +134,12 @@ confint.onephase<- function(object, parm, level = 0.95, adjust.method="none",...
   }
   # ----------#
 
-  # calculating the quantile of the normal distribution:
-  q.val<- qnorm(p = 1-( (1-level)/2 ))
+  # calculating the quantile of the t-distribution with n2 - 1 df:
+  t.val<- suppressWarnings(qt(p = 1-( (1-level)/2 ), df = object$estimation$n2 - 1))
 
   # calculating the lower and upper confidence intervals based on the design-based variance:
-  ci.lower<- object$estimation$estimate - (q.val * sqrt(object$estimation$variance))
-  ci.upper<- object$estimation$estimate + (q.val * sqrt(object$estimation$variance))
+  ci.lower<- object$estimation$estimate - (t.val * sqrt(object$estimation$variance))
+  ci.upper<- object$estimation$estimate + (t.val * sqrt(object$estimation$variance))
 
   if ("area"  %in% names(object$estimation)){
     ci<- list(ci=data.frame(area=object$estimation$area, ci.lower, ci.upper), level=orig.level, adjust.method=adjust.method)
