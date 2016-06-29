@@ -1,0 +1,8 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^data-raw$
+^examples$
+^cran-comments\.md$
+^README\.Rmd$
+^README-.*\.png$
+^NEWS\.md$

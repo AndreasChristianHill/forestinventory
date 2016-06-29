@@ -1,0 +1,14 @@
+citHeader("To cite forestinventory in publications use:")
+
+citEntry(entry = "Manual",
+         title = "forestinventory: Design-based global and small-area estimations for multiphase forest inventories. R package version 0.1.0",
+         author = c(
+                     person("Andreas", "Hill",       email = "forestinventory@gmx.ch", role = "cre"),
+                     person("Alexander", "Massey",   email = "forestinventory@gmx.ch", role = "aut"),
+                     person("Daniel", "Mandallaz",                                     role = "ctb")
+                   ),
+         year = "2016",
+         textVersion =
+           paste("Andreas Hill, Alexander Massey, Daniel Mandallaz (2016).",
+                 "forestinventory: Design-based global and small-area estimations for multiphase forest inventories. R package version 0.1.0")
+)
