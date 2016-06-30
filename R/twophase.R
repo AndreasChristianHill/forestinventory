@@ -125,6 +125,8 @@
 #' @note
 #' In the special case of cluster sampling, the reported sample sizes in \code{estimation} are the number of clusters.
 #' The \code{samplesize}-object also provides the respective number of single plot units for cluster sampling.
+#' The reported \code{r.squared} describe the model fit of the applied linear regression
+#' model (i.e. on \emph{plot-level}, not on \emph{cluster level}).
 #'
 #' @references Mandallaz, D. (2007). \emph{Sampling techniques for forest inventories.} Chapter 4. CRC Press.
 #' @references Mandallaz, D. (2013). \emph{Design-based properties of some small-area estimators in forest inventory with two-phase sampling.} Can. J. For. Res. 43: 441-449

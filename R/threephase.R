@@ -118,8 +118,8 @@
 #'                    \item \code{n0G} the first phase sample size in the small area
 #'                    \item \code{n1G} the second phase sample size in the small area
 #'                    \item \code{n2G} the third phase (i.e. terrestrial) sample size in the small area
-#'                    \item \code{r.squared_reduced} the R squared of the linear model based on \code{formula.s0} (i.e. the reduced model)
-#'                    \item \code{r.squared_full} the R squared of the linear model based on \code{formula.s1} (i.e. the full model)
+#'                    \item \code{r.squared_reduced} the R-squared of the linear model based on \code{formula.s0} (i.e. the reduced model)
+#'                    \item \code{r.squared_full} the R-squared of the linear model based on \code{formula.s1} (i.e. the full model)
 #'                    }}
 #'  \item{samplesizes}{a \code{\link[base]{data.frame}} summarizing all samplesizes: in case of cluster sampling both,
 #'                     the number of individual plots and the number of clusters is reported.}
@@ -142,7 +142,8 @@
 #' @note
 #' In the special case of cluster sampling, the reported sample sizes in \code{estimation} are the number of clusters.
 #' The \code{samplesize}-object also provides the respective number of single plot units for cluster sampling.
-#'
+#' The reported \code{r.squared_reduced} and \code{r.squared_full} describe the model fit of the applied linear regression
+#' models (i.e. on \emph{plot-level}, not on \emph{cluster level}).
 #'
 #' @references Mandallaz, D., Breschan, J., & Hill, A. (2013). \emph{New regression estimators in forest inventories
 #' with two-phase sampling and partially exhaustive information: a design-based monte carlo approach
