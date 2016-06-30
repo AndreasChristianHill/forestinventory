@@ -7,7 +7,8 @@ date: "12 April 2016"
 
 ## Test environments
 * local Windows 7 OS, R 3.2.3 
-* Mac OS -----
+* local Mac OS 10.11.5, R 3.2.4
+* local Ubuntu 16.04, R 3.2.3 
 
 ## R CMD check results
 There were no ERRORS, WARNINGS or NOTES
