@@ -29,7 +29,7 @@ has been artificially extended to a threephase inventory for demonstration purpo
                           and terrestrial phase (\code{2}). \emph{Note:} The threephase sample scheme
                           was artificially created for demonstration purposes of the
                           \code{\link{threephase}}-functions.}
- \item{\code{boundary_weights} proportion of analysis-window for auxiliary information lying within the forrest.}
+ \item{\code{boundary_weights} proportion of analysis-window for auxiliary information lying within the forest.}
  \item{\code{mean} mean canopy height at the sample location based on the LiDAR canopy height model.}
  \item{\code{stddev} standard deviation of the LiDAR canopy height model at the sample location.}
  \item{\code{max} maximum value of the LiDAR canopy height model at the sample location.}
