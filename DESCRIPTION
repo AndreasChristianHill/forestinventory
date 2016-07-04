@@ -1,6 +1,6 @@
 Package: forestinventory
 Type: Package
-Title: Design-based global and small-area estimations for multiphase forest inventories
+Title: Design-Based Global and Small-Area Estimations for Multiphase Forest Inventories
 Version: 0.1.0
 Authors@R: c(
             person("Andreas", "Hill",       email = "forestinventory@gmx.ch", role = "cre"),
