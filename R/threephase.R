@@ -155,6 +155,7 @@
 #' @example examples/example_threephase_estimations_long.R
 #'
 #' @import plyr
+#' @import stats
 #' @export
 
 # This is the master three-phase function that calls helper functions for the following estimates

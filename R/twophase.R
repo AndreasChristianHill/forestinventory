@@ -135,6 +135,7 @@
 #' @example examples/example_twophase_estimations_long.R
 #'
 #' @import plyr
+#' @import stats
 #' @export
 
 # This is the master two-phase function that calls helper functions for the following estimates

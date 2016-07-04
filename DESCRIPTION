@@ -7,15 +7,15 @@ Authors@R: c(
             person("Alexander", "Massey",   email = "forestinventory@gmx.ch", role = "aut"),
             person("Daniel", "Mandallaz",                                     role = "ctb")
             )
-Maintainer: Andreas Hill, Alexander Massey <forestinventory@gmx.ch>
-Description: This package provides extensive global and small-area estimation
+Maintainer: Andreas Hill <forestinventory@gmx.ch>
+Description: Extensive global and small-area estimation
     procedures for multiphase forest inventories under the design-based Monte-Carlo
-    approach. The implementation includes all estimators for simple and cluster
+    approach are provided. The implementation includes all estimators for simple and cluster
     sampling published by Daniel Mandallaz between 2007 and 2014, providing point
     estimates, their external- and design-based variances as well as confidence
     intervals. The procedures have also been optimized for the use of remote sensing
     data as auxiliary information.
 License: GPL (>= 2)
 LazyData: TRUE
-Imports: plyr (>= 1.8.3)
+Imports: plyr (>= 1.8.3), stats
 RoxygenNote: 5.0.1
