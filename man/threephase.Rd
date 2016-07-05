@@ -139,6 +139,12 @@ equivalent version derived under Mandallaz's extended model approach.
                    synthetic estimator and adding the mean residual observed in the small area.  It is activated
                    when \code{psmall}=TRUE.
                  }
+
+         Missing values (\code{NA}) in the auxiliary variables (i.e. at least one auxiliary variable cannot be observed at
+         an inventory location) are automatically removed from the dataset \emph{before} the estimations are computed.
+         Note that missingness in the auxiliary variables is only allowed if we assume that they are \emph{missing at random},
+         since the unbiasedness of the estimates is based on the sampling design.
+
          The boundary weight adjustment is pertinent for auxiliary information derived from remote sensing and
          is equal to the percentage of forested area (e.g. as defined by a forest mask) in the interpretation area.
 
