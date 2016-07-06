@@ -8,6 +8,8 @@ date: "06 July 2016"
 ## Resubmission
 This is a resubmission. In addition to the previous upload, we have:
 
+* removed an unwanted space in the DOI-specification in the DESCRIPTION
+
 * Specified the publications mentioned in the DESCRIPTION by giving
   the respective DOIs (<DOI: .... >). Each referred DOI in the DESCRIPTION is
   further specified within the DOCUMENTATION.
