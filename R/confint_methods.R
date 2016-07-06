@@ -84,21 +84,21 @@
 #'
 #' @references
 #'
-#' Mandallaz, D. (2013). Design-based properties of some small-area estimators in forest inventory
-#' with two-phase sampling. \emph{Canadian Journal of Forest Research}, \strong{43(5)}, 441-449.
+#' Mandallaz, D. (2013). \emph{Design-based properties of some small-area estimators in forest inventory
+#' with two-phase sampling.} Canadian Journal of Forest Research, 43(5), 441-449.
 #'
-#' Mandallaz, D., Breschan, J., & Hill, A. (2013). New regression estimators in forest inventories
+#' Mandallaz, D., Breschan, J., & Hill, A. (2013). \emph{New regression estimators in forest inventories
 #' with two-phase sampling and partially exhaustive information: a design-based monte carlo approach
-#' with applications to small-area estimation. \emph{Canadian Journal of Forest Research},
-#' \strong{43(11)}, 1023-1031.
+#' with applications to small-area estimation.} Canadian Journal of Forest Research,
+#' 43(11), 1023-1031.
 #'
-#' Mandallaz, D. (2013). A three-phase sampling extension of the generalized regression estimator
-#' with partially exhaustive information. \emph{Canadian Journal of Forest Research},
-#' \strong{44(4)}, 383-388.
+#' Mandallaz, D. (2013). \emph{A three-phase sampling extension of the generalized regression estimator
+#' with partially exhaustive information.} Canadian Journal of Forest Research,
+#' 44(4), 383-388.
 #'
-#' Benjamini, Y., and Hochberg, Y. (1995). Controlling the false discovery rate:
-#' a practical and powerful approach to multiple testing.
-#' \emph{Journal of the Royal Statistical Society Series B} \strong{57}, 289-300.
+#' Benjamini, Y., and Hochberg, Y. (1995). \emph{Controlling the false discovery rate:
+#' a practical and powerful approach to multiple testing.}
+#' Journal of the Royal Statistical Society Series B 57, 289-300.
 #'
 #' @example examples/example_confint.R
 #'

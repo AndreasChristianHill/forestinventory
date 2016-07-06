@@ -41,13 +41,13 @@
 #'
 #'         The dataset was created and used within the framework of the publications listed under \emph{References}.
 #'
-#'@references Mandallaz, D., Breschan, J., & Hill, A. (2013). New regression estimators in forest inventories
+#'@references Mandallaz, D., Breschan, J., & Hill, A. (2013). \emph{New regression estimators in forest inventories
 #'           with two-phase sampling and partially exhaustive information:
-#'           a design-based monte carlo approach with applications to small-area estimation.
-#'           \emph{Canadian Journal of Forest Research}, 43(11), 1023-1031.
+#'           a design-based monte carlo approach with applications to small-area estimation.}
+#'           Canadian Journal of Forest Research, 43(11), 1023-1031.
 #'
-#'           Hill, A., Breschan, J., & Mandallaz, D. (2014). Accuracy assessment of timber
-#'           volume maps using forest inventory data and LiDAR canopy height models.
-#'           \emph{Forests}, 5(9), 2253-2275.
+#'           Hill, A., Breschan, J., & Mandallaz, D. (2014). \emph{Accuracy assessment of timber
+#'           volume maps using forest inventory data and LiDAR canopy height models.}
+#'           Forests, 5(9), 2253-2275.
 #'
 "grisons"

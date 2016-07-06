@@ -33,18 +33,18 @@
 #'
 #'@section Selected references:
 #'
-#' Massey, A. F. (2015). Multiphase estimation procedures for forest inventories under
-#' the design-based Monte Carlo approach (Doctoral dissertation, Diss., ETH Zurich, Nr. 23025).
+#' Massey, A. F. (2015). \emph{Multiphase estimation procedures for forest inventories under
+#' the design-based Monte Carlo approach} (Doctoral dissertation, Diss., ETH Zurich, Nr. 23025).
 #'
-#' Mandallaz, D. (2013). Design-based properties of some small-area estimators in
-#' forest inventory with two-phase sampling. Canadian Journal of Forest Research, 43(5), 441-449.
+#' Mandallaz, D. (2013). \emph{Design-based properties of some small-area estimators in
+#' forest inventory with two-phase sampling.} Canadian Journal of Forest Research, 43(5), 441-449.
 #'
-#' Mandallaz, D., Breschan, J., & Hill, A. (2013). New regression estimators in forest inventories
+#' Mandallaz, D., Breschan, J., & Hill, A. (2013). \emph{New regression estimators in forest inventories
 #' with two-phase sampling and partially exhaustive information: a design-based monte carlo approach
-#' with applications to small-area estimation. Canadian Journal of Forest Research, 43(11), 1023-1031.
+#' with applications to small-area estimation.} Canadian Journal of Forest Research, 43(11), 1023-1031.
 #'
-#' Mandallaz, D. (2013). A three-phase sampling extension of the generalized regression estimator
-#' with partially exhaustive information. Canadian Journal of Forest Research, 44(4), 383-388.
+#' Mandallaz, D. (2013). \emph{A three-phase sampling extension of the generalized regression estimator
+#' with partially exhaustive information.} Canadian Journal of Forest Research, 44(4), 383-388.
 #'
 
 #'

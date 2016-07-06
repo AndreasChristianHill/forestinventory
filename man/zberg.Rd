@@ -41,11 +41,11 @@ has been artificially extended to a threephase inventory for demonstration purpo
 }
 }
 \references{
-Mandallaz, Daniel (1991). A unified approach to sampling theory for forest inventory
-           based on infinite population and superpopulation models. http://dx.doi.org/10.3929/ethz-a-000585900
+Mandallaz, Daniel (1991). \emph{A unified approach to sampling theory for forest inventory
+           based on infinite population and superpopulation models.} http://dx.doi.org/10.3929/ethz-a-000585900
 
-           Mandallaz, Daniel (1993). Geostatistical methods for double sampling schemes. application to combined forest inventories.
-           Chair of Forest Inventory and Planning, Swiss Federal Institute of Technology (ETH) . http://dx.doi.org/10.3929/ethz-a-000943897
+           Mandallaz, Daniel (1993). \emph{Geostatistical methods for double sampling schemes. application to combined forest inventories.}
+           Chair of Forest Inventory and Planning, Swiss Federal Institute of Technology (ETH). http://dx.doi.org/10.3929/ethz-a-000943897
 }
 \keyword{datasets}
 

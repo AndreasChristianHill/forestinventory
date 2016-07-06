@@ -1,8 +1,16 @@
 ---
 title: "cran-comments"
 author: "Andreas Hill, Alexander Massey"
-date: "05 July 2016"
+date: "06 July 2016"
 ---
+
+
+## Resubmission
+This is a resubmission. In addition to the previous upload, we have:
+
+* Specified the publications mentioned in the DESCRIPTION by giving
+  the respective DOIs (<DOI: .... >). Each referred DOI in the DESCRIPTION is
+  further specified within the DOCUMENTATION.
 
 
 ## Test environments
