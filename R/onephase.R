@@ -249,6 +249,7 @@ onephase <- function(formula, data,
     # ... to store inputs used:
     inputs<- list()
     inputs[["data"]]<- data
+    inputs[["method"]]<- "onephase"
     inputs[["cluster"]]<- !is.na(cluster)
     inputs[["call"]]<- call
 
