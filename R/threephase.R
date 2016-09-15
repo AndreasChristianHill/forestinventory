@@ -30,9 +30,10 @@
 #'                  \item \code{phase.col}: the column name in \code{data} that specifies the
 #'                                          phase membership of each observation
 #'                  \item \code{s1.id}: the indicator identifying the "second phase only" plots
-#'                                            for that column
+#'                                            for that column  (must be of type "\code{\link[base]{numeric}}")
 #'                  \item \code{terrgrid.id}: the indicator identifying the terrestrial
 #'                                            (a.k.a. "ground truth") phase for that column
+#'                                             (must be of type "\code{\link[base]{numeric}}")
 #'                     }
 #'
 #' @param cluster (\emph{Optional}) Specifies the column name in \code{data}
