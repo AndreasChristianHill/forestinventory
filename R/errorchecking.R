@@ -32,6 +32,11 @@ check.mandatoryInputs<- function(formula, data, phase_id){
   if(!all(phase_id[["terrgrid.id"]] %in% sapply(unique(data[phase_id[["phase.col"]]]), as.character))) {
     stop("the specified terrestrial grid indicator does not exist in data")
   }
+
+ if (!is.numeric( data [[ phase_id[["phase.col"]] ]])){
+   stop("'phase_id'-argument must be of type numeric")
+ }
+
 } #end check.mandatoryInputs
 
 
@@ -57,7 +62,7 @@ check.mandatoryInputs3p<- function(formula.s0, formula.s1, data, phase_id){
   # ------------------------------------- #
   # 3) check if reduced model is a nested in the full model:
 
-  if(!all(paste(c(attr(terms(formula.s0),"term.labels")))  %in%  paste(c(attr(terms(formula.s1),"term.labels")))) {
+  if(!all(paste(c(attr(terms(formula.s0),"term.labels")))  %in%  paste(c(attr(terms(formula.s1),"term.labels"))))) {
     warning("reduced- and full model not nested: variables in 'formula.s0' not a subset of the variables used in 'formula.s1'")
   }
 
