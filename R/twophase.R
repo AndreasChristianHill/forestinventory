@@ -230,30 +230,66 @@ twophase <- function(formula, data, phase_id, cluster=NA,
 
   check.mandatoryInputs(formula, data, phase_id)
 
+  # -------------------------------------------------------------------------- #
+  # -------------------------------------------------------------------------- #
+  # Checking the nesting of the sample-design:
+  # --> each s2-point muss have the complete set of auxvars (s1-info) available
+
+  nest.violation<- sum(is.na(data [ data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] , which(colnames(data) %in% all.vars(formula)[-1])]))
+
+  if(nest.violation > 0){
+    warning(paste("Sample design not nested: for",nest.violation,"terrestrial plots at least one auxiliary parameter is missing"))
+  }
+
 
   # -------------------------------------------------------------------------- #
   # -------------------------------------------------------------------------- #
   # NA-treatment:
 
-  # rows to be deleted due to missing auxiliary information or any input parameters:
+  # rows to be deleted due to missingness in s1 (i.e. set of auxiliary informations):
   deleted.s1<- !complete.cases(data [, which(colnames(data) %in% all.vars(formula)[-1])]) # logical vector returning rows with missing entries
   sum.NA_omitted<- sum(deleted.s1)
 
   # delete missing rows in entire dataset and produce message:
   if(sum.NA_omitted != 0) {
     data<- data[- which(deleted.s1),]
-    message(paste(sum.NA_omitted," rows deleted due to missingness in the auxiliary parameters or any of the input parameters",sep = ""))
-    }
+    message(paste(sum.NA_omitted," rows deleted due to missingness in the set of auxiliary parameters (",
+                  nest.violation," terrestrial plots affected by deletion)",sep = ""))
+  }
 
-  # check if  every terrestrial plot has a response-value:
+  # check if every terrestrial plot (s2) has a response-value assigned:
   deleted.s2 <- data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] & !complete.cases(data[,all.vars(formula)[1]])
   sum.deleted.s2<- sum(deleted.s2)
 
   # change missing reponse information for s2-grid to s1-grid and produce message:
   if(sum.deleted.s2 != 0) {
     data<- data[- which(deleted.s2),]
-    message(paste(sum.deleted.s2," rows deleted due to missing value for the response variable", sep = ""))
-    }
+    message(paste("Additional ", sum.deleted.s2," rows deleted due to missing value for the response variable", sep = ""))
+  }
+
+  # -------------------------------------------------------------------------- #
+  # -------------------------------------------------------------------------- #
+  # NA-treatment:
+
+  # # rows to be deleted due to missingness in s1 (i.e. set of auxiliary informations):
+  # deleted.s1<- !complete.cases(data [, which(colnames(data) %in% all.vars(formula)[-1])]) # logical vector returning rows with missing entries
+  # sum.NA_omitted<- sum(deleted.s1)
+  #
+  # # delete missing rows in entire dataset and produce message:
+  # if(sum.NA_omitted != 0) {
+  #   data<- data[- which(deleted.s1),]
+  #   message(paste(sum.NA_omitted," rows deleted due to missingness in the auxiliary parameters",sep = ""))
+  #   }
+  #
+  # # check if every entry marked as a terrestrial plot (s2) has a response-value assigned:
+  # deleted.s2 <- data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] & !complete.cases(data[,all.vars(formula)[1]])
+  # sum.deleted.s2<- sum(deleted.s2)
+  #
+  # # change missing reponse information for s2-grid to s1-grid and produce message:
+  # if(sum.deleted.s2 != 0) {
+  #   data<- data[- which(deleted.s2),]
+  #   message(paste(sum.deleted.s2," rows deleted due to missing value for the response variable", sep = ""))
+  #   }
 
 
   # -------------------------------------------------------------------------- #
