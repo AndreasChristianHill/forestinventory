@@ -22,6 +22,7 @@ requested in the function.}
                              phase membership of each observation
      \item \code{terrgrid.id}: the indicator identifying the terrestrial
                                (a.k.a. "ground truth") phase for that column
+                                (must be of type "\code{\link[base]{numeric}}")
         }}
 
 \item{cluster}{(\emph{Optional}) Specifies the column name in \code{data}

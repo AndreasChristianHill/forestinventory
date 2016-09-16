@@ -21,6 +21,7 @@ Specifications are given under 'Details'.}
                                   phase membership of each observation
           \item \code{terrgrid.id}: the indicator identifying the the terrestrial
                                     (a.k.a. "ground truth") phase for that column
+                                    (must be of type "\code{\link[base]{numeric}}")
              }
 \strong{Note:} Only has to be specified if \code{data} is of class \code{data.frame}.}
 
