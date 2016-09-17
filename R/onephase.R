@@ -177,13 +177,13 @@ onephase <- function(formula, data,
     # -----------------------#
     # NA-treatment:
 
-    # rows to be deleted due to missing auxiliary information or any input parameters:
-    deleted.s1<- !complete.cases(data.terr [,response]) # logical vector returning rows with missing response
-    sum.NA_omitted<- sum(deleted.s1)
+    # rows to be deleted due to missing response value:
+    deleted.s2<- !complete.cases(data.terr [,response]) # logical vector returning rows with missing response
+    sum.NA_omitted<- sum(deleted.s2)
 
     # delete missing rows in entire dataset and produce message:
     if(sum.NA_omitted != 0) {
-      data.terr<- data.terr[- which(deleted.s1),]
+      data.terr<- data.terr[- which(deleted.s2),]
       message(paste(sum.NA_omitted," rows deleted due to missingness in the response value",sep = ""))
     }
 
