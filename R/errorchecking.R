@@ -37,6 +37,39 @@ check.mandatoryInputs<- function(formula, data, phase_id){
    stop("'phase_id'-argument must be of type numeric")
  }
 
+  # --------------------------------- #
+  # 4) check for availability of categorical vars in s2-sample:
+
+    # get column-indices (ind.catvars) of categorical variables in dataset used in model-formula:
+    names.catvars<- names(which(sapply(data[,all.vars(formula)[-1]], is.factor)))
+    ind.catvars<- which(colnames(data) %in% names.catvars)
+    error.list<- list()
+
+    if (length(ind.catvars) > 0) {
+
+      for(i in 1:length(ind.catvars)){
+
+        tab.g<- table(data[,ind.catvars[i]], data[[ phase_id[["phase.col"]] ]])
+        ind.s2col<- which(colnames(tab.g) == as.character(phase_id[["terrgrid.id"]]))
+        ind.s1col<- which(colnames(tab.g) != as.character(phase_id[["terrgrid.id"]]))
+
+        log.ind<- tab.g[ ,ind.s2col] == 0 & tab.g[ ,ind.s1col] > 0
+
+        if(any(log.ind)){
+          ind<- which(tab.g[ ,ind.s2col] == 0 & tab.g[ ,ind.s1col] > 0)
+
+          error.list[i]<- paste("\n Level '", rownames(tab.g)[ind],"' of factor variable '",
+                                colnames(data)[ind.catvars[i]],
+                                "' existing in s1(s0)- but not in s2 sample. Calculation of coefficient not feasible.",
+                                sep="")
+        }
+      }
+
+      if(length(error.list) > 0){stop(unlist(error.list))}
+
+    }
+
+
 } #end check.mandatoryInputs
 
 
@@ -66,7 +99,7 @@ check.mandatoryInputs3p<- function(formula.s0, formula.s1, data, phase_id){
     warning("reduced- and full model not nested: variables in 'formula.s0' not a subset of the variables used in 'formula.s1'")
   }
 
-    # --------------------------------- #
+  # --------------------------------- #
   # 4) check for input-type "phase_id":
 
   # check if "phase.col" is character:
@@ -83,6 +116,39 @@ check.mandatoryInputs3p<- function(formula.s0, formula.s1, data, phase_id){
   if(!all(phase_id[["s2grid.id"]] %in% sapply(unique(data[phase_id[["phase.col"]]]), as.character))) {
     stop("the specified first-phase grid indicator does not exist in data")
   }
+
+  # --------------------------------- #
+  # 5) check for availability of categorical vars in s2-sample:
+
+  # get column-indices (ind.catvars) of categorical variables in dataset used in full-model formula:
+  names.catvars<- names(which(sapply(data[,all.vars(formula.s1)[-1]], is.factor)))
+  ind.catvars<- which(colnames(data) %in% names.catvars)
+  error.list<- list()
+
+  if (length(ind.catvars) > 0) {
+
+    for(i in 1:length(ind.catvars)){
+
+      tab.g<- table(data[,ind.catvars[i]], data[[ phase_id[["phase.col"]] ]])
+      ind.s2col<- which(colnames(tab.g) == as.character(phase_id[["terrgrid.id"]]))
+      ind.s1col<- which(colnames(tab.g) != as.character(phase_id[["terrgrid.id"]]))
+
+      log.ind<- tab.g[ ,ind.s2col] == 0 & tab.g[ ,ind.s1col] > 0
+
+      if(any(log.ind)){
+        ind<- which(tab.g[ ,ind.s2col] == 0 & tab.g[ ,ind.s1col] > 0)
+
+        error.list[i]<- paste("\n Level '", rownames(tab.g)[ind],"' of factor variable '",
+                              colnames(data)[ind.catvars[i]],
+                              "' existing in s1(s0)- but not in s2 sample. Calculation of coefficient not feasible.",
+                              sep="")
+      }
+    }
+
+    if(length(error.list) > 0){stop(unlist(error.list))}
+
+  }
+
 } #end check.mandatoryInputs3p
 
 
