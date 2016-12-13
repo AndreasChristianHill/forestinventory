@@ -346,7 +346,11 @@ twophase <- function(formula, data, phase_id, cluster=NA,
       # source("small_area_looper.R")
 
       # -- call function -- :
-      result <- small_area_looper(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      if(!psmall){
+        result <- small_area_looper(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      } else {
+        result<- psmall_fct(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      }
 
 
     }
@@ -364,7 +368,11 @@ twophase <- function(formula, data, phase_id, cluster=NA,
       # source("small_area_looper.R")
 
       # -- call function -- :
-      result <- small_area_looper(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      if(!psmall){
+        result <- small_area_looper(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      } else {
+        result<- psmall_fct(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      }
 
     }
 
@@ -432,7 +440,11 @@ twophase <- function(formula, data, phase_id, cluster=NA,
       # source("small_area_looper.R")
 
       # -- call function -- :
-      result <- small_area_looper(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      if(!psmall){
+        result <- small_area_looper(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      } else {
+        result<- psmall_fct(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      }
 
     }
 
@@ -450,23 +462,16 @@ twophase <- function(formula, data, phase_id, cluster=NA,
       # source("small_area_looper.R")
 
       # -- call function -- :
-      result <- small_area_looper(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      if(!psmall){
+        result <- small_area_looper(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      } else {
+        result<- psmall_fct(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      }
 
     }
 
 
   } # end of non-cluster function calls
-
-
-  # ---------------------------------------------------------------------#
-  # check if --> psmall estimation is desired and transform output
-
-  if(psmall==TRUE){
-    if(small_area[["unbiased"]]==FALSE){stop("'unbiased' cannot be set to 'FALSE' for 'psmall' = 'TRUE'")} # function would execute though, so its more a logical guideline for the user
-    if(!class(result)[1]=="smallarea"){stop("'psmall' can only be applied for objects of class 'smallarea'")}
-    # source("psmall_fct.R")
-    result<- psmall_fct(formula, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
-  }
 
 
   # -------------------------------------------------------------------------- #
