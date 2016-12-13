@@ -407,7 +407,11 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
       # source("small_area_looper_3p.R")
 
       # -- call function -- :
-      result <-  small_area_looper_3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      if(!psmall){
+        result <-  small_area_looper_3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      } else {
+        result<- psmall_fct3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      }
 
     }
 
@@ -424,7 +428,11 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
       # source("small_area_looper_3p.R")
 
       # -- call function -- :
-      result <- small_area_looper_3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      if(!psmall){
+        result <- small_area_looper_3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      } else {
+        result<- psmall_fct3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      }
 
     }
 
@@ -492,7 +500,12 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
       # source("small_area_looper_3p.R")
 
       # -- call function -- :
-      result <- small_area_looper_3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      if(!psmall){
+        result <- small_area_looper_3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      } else {
+        result<- psmall_fct3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      }
+
 
     }
 
@@ -510,23 +523,16 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
       # source("small_area_looper_3p.R")
 
       # -- call function -- :
-      result <- small_area_looper_3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      if(!psmall){
+        result <- small_area_looper_3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      } else {
+        result<- psmall_fct3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
+      }
 
     }
 
 
   } # end of non-cluster function calls
-
-
-  # ---------------------------------------------------------------------#
-  # check if --> psmall estimation is desired and transform output
-
-  if(psmall==TRUE){
-    if(small_area[["unbiased"]]==FALSE){stop("'unbiased' cannot be set to 'FALSE' for 'psmall' = 'TRUE'")} # function would execute though, so its more a logical guideline for the user
-    if(!class(result)[1]=="smallarea"){stop("'psmall' can only be applied for objects of class 'smallarea'")}
-    # source("psmall_fct3p.R")
-    result<- psmall_fct3p(formula.s0, formula.s1, data, phase_id, cluster, small_area, boundary_weights, exhaustive, progressbar, psmall)
-  }
 
 
   # -------------------------------------------------------------------------- #
