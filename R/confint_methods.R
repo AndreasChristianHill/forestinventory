@@ -138,13 +138,13 @@ confint.onephase<- function(object, parm, level = 0.95, adjust.method="none",...
   t.val<- suppressWarnings(qt(p = 1-( (1-level)/2 ), df = object$estimation$n2 - 1))
 
   # calculating the lower and upper confidence intervals based on the design-based variance:
-  ci.lower<- object$estimation$estimate - (t.val * sqrt(object$estimation$variance))
-  ci.upper<- object$estimation$estimate + (t.val * sqrt(object$estimation$variance))
+  ci.lower.op<- object$estimation$estimate - (t.val * sqrt(object$estimation$variance))
+  ci.upper.op<- object$estimation$estimate + (t.val * sqrt(object$estimation$variance))
 
   if ("area"  %in% names(object$estimation)){
-    ci<- list(ci=data.frame(area=object$estimation$area, ci.lower, ci.upper), level=orig.level, adjust.method=adjust.method)
+    ci<- list(ci=data.frame(area=object$estimation$area, estimate=object$estimation$estimate, ci.lower.op, ci.upper.op), level=orig.level, adjust.method=adjust.method)
   } else {
-    ci<- list(ci=data.frame(ci.lower, ci.upper), level=orig.level, adjust.method=adjust.method)
+    ci<- list(ci=data.frame(estimate=object$estimation$estimate, ci.lower.op, ci.upper.op), level=orig.level, adjust.method=adjust.method)
   }
 
   class(ci)<- c("confint.global", "onephase")
@@ -192,7 +192,7 @@ confint.twophase<- function(object, parm, level = 0.95, adjust.method="none",...
     # if synthetic-estimation was applied, the df's are calculated as n2 - # parameters of regression model:
     if(object$input$method %in% c("synth", "psynth")){
 
-      t.val<- suppressWarnings(qt(p = 1-( (1-level)/2 ), df = object$samplesizes[[1]][["n2"]] - length(all.vars(object$input$formula)[-1])))
+      t.val<- suppressWarnings(qt(p = 1-( (1-level)/2 ), df = unique(object$estimation[["n2"]]) - length(all.vars(object$input$formula)[-1])))
 
       # if non-synthetic-estimation was applied, the df's are calculated as n2G - 1:
     } else {
@@ -208,7 +208,7 @@ confint.twophase<- function(object, parm, level = 0.95, adjust.method="none",...
     ci.lower.ext<- object$estimation$estimate - (t.val * sqrt(object$estimation$ext_variance))
     ci.upper.ext<- object$estimation$estimate + (t.val * sqrt(object$estimation$ext_variance))
 
-    ci<- list(ci=data.frame(area=object$estimation$area, ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
+    ci<- list(ci=data.frame(area=object$estimation$area, estimate=object$estimation$estimate, ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
               level=orig.level, adjust.method=adjust.method)
 
     class(ci)<- c("confint.smallarea", "twophase")
@@ -236,7 +236,7 @@ confint.twophase<- function(object, parm, level = 0.95, adjust.method="none",...
     ci.lower.ext<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["ext_variance"]]))
     ci.upper.ext<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["ext_variance"]]))
 
-    ci<- list(ci=data.frame(ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
+    ci<- list(ci=data.frame(estimate=object$estimation[["estimate"]], ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
               level=orig.level, adjust.method=adjust.method)
 
     class(ci)<- c("confint.global", "twophase")
@@ -286,7 +286,7 @@ confint.threephase<- function(object, parm, level = 0.95, adjust.method="none", 
     # if synthetic-estimation was applied, the df's are calculated as n2 - # parameters of regression model:
     if(object$input$method %in% c("synth", "psynth")){
 
-      t.val<- suppressWarnings(qt(p = 1-( (1-level)/2 ), df = object$samplesizes[[1]][["n2"]] - length(all.vars(object$input$formula.s1)[-1])))
+      t.val<- suppressWarnings(qt(p = 1-( (1-level)/2 ), df = unique(object$estimation[["n2"]]) - length(all.vars(object$input$formula.s1)[-1])))
 
       # if non-synthetic-estimation was applied, the df's are calculated as n2G - 1:
     } else {
@@ -303,7 +303,7 @@ confint.threephase<- function(object, parm, level = 0.95, adjust.method="none", 
     ci.lower.ext<- object$estimation$estimate - (t.val * sqrt(object$estimation$ext_variance))
     ci.upper.ext<- object$estimation$estimate + (t.val * sqrt(object$estimation$ext_variance))
 
-    ci<- list(ci=data.frame(area=object$estimation$area, ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
+    ci<- list(ci=data.frame(area=object$estimation$area, estimate=object$estimation$estimate, ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
               level=orig.level, adjust.method=adjust.method)
 
     class(ci)<- c("confint.smallarea", "threephase")
@@ -331,7 +331,7 @@ confint.threephase<- function(object, parm, level = 0.95, adjust.method="none", 
     ci.lower.ext<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["ext_variance"]]))
     ci.upper.ext<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["ext_variance"]]))
 
-    ci<- list(ci=data.frame(ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
+    ci<- list(ci=data.frame(estimate=object$estimation[["estimate"]], ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
               level=orig.level,adjust.method=adjust.method)
 
     class(ci)<- c("confint.global", "threepase")
