@@ -138,13 +138,13 @@ confint.onephase<- function(object, parm, level = 0.95, adjust.method="none",...
   t.val<- suppressWarnings(qt(p = 1-( (1-level)/2 ), df = object$estimation$n2 - 1))
 
   # calculating the lower and upper confidence intervals based on the design-based variance:
-  ci.lower.op<- object$estimation$estimate - (t.val * sqrt(object$estimation$variance))
-  ci.upper.op<- object$estimation$estimate + (t.val * sqrt(object$estimation$variance))
+  ci_lower_op<- object$estimation$estimate - (t.val * sqrt(object$estimation$variance))
+  ci_upper_op<- object$estimation$estimate + (t.val * sqrt(object$estimation$variance))
 
   if ("area"  %in% names(object$estimation)){
-    ci<- list(ci=data.frame(area=object$estimation$area, estimate=object$estimation$estimate, ci.lower.op, ci.upper.op), level=orig.level, adjust.method=adjust.method)
+    ci<- list(ci=data.frame(area=object$estimation$area, estimate=object$estimation$estimate, ci_lower_op, ci_upper_op), level=orig.level, adjust.method=adjust.method)
   } else {
-    ci<- list(ci=data.frame(estimate=object$estimation$estimate, ci.lower.op, ci.upper.op), level=orig.level, adjust.method=adjust.method)
+    ci<- list(ci=data.frame(estimate=object$estimation$estimate, ci_lower_op, ci_upper_op), level=orig.level, adjust.method=adjust.method)
   }
 
   class(ci)<- c("confint.global", "onephase")
@@ -201,14 +201,14 @@ confint.twophase<- function(object, parm, level = 0.95, adjust.method="none",...
 
     #-----------#
     # calculating the lower and upper confidence intervals based on the external variance:
-    ci.lower.g<- object$estimation$estimate - (t.val * sqrt(object$estimation$g_variance))
-    ci.upper.g<- object$estimation$estimate + (t.val * sqrt(object$estimation$g_variance))
+    ci_lower_g<- object$estimation$estimate - (t.val * sqrt(object$estimation$g_variance))
+    ci_upper_g<- object$estimation$estimate + (t.val * sqrt(object$estimation$g_variance))
 
     # calculating the lower and upper confidence intervals based on the design-based variance:
-    ci.lower.ext<- object$estimation$estimate - (t.val * sqrt(object$estimation$ext_variance))
-    ci.upper.ext<- object$estimation$estimate + (t.val * sqrt(object$estimation$ext_variance))
+    ci_lower_ext<- object$estimation$estimate - (t.val * sqrt(object$estimation$ext_variance))
+    ci_upper_ext<- object$estimation$estimate + (t.val * sqrt(object$estimation$ext_variance))
 
-    ci<- list(ci=data.frame(area=object$estimation$area, estimate=object$estimation$estimate, ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
+    ci<- list(ci=data.frame(area=object$estimation$area, estimate=object$estimation$estimate, ci_lower_ext, ci_upper_ext, ci_lower_g, ci_upper_g),
               level=orig.level, adjust.method=adjust.method)
 
     class(ci)<- c("confint.smallarea", "twophase")
@@ -230,13 +230,13 @@ confint.twophase<- function(object, parm, level = 0.95, adjust.method="none",...
 
     t.val<- qt(p = 1-( (1-level)/2 ), df = n2 - length(all.vars(object$input$formula)[-1]))
 
-    ci.lower.g<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["g_variance"]]))
-    ci.upper.g<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["g_variance"]]))
+    ci_lower_g<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["g_variance"]]))
+    ci_upper_g<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["g_variance"]]))
 
-    ci.lower.ext<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["ext_variance"]]))
-    ci.upper.ext<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["ext_variance"]]))
+    ci_lower_ext<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["ext_variance"]]))
+    ci_upper_ext<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["ext_variance"]]))
 
-    ci<- list(ci=data.frame(estimate=object$estimation[["estimate"]], ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
+    ci<- list(ci=data.frame(estimate=object$estimation[["estimate"]], ci_lower_ext, ci_upper_ext, ci_lower_g, ci_upper_g),
               level=orig.level, adjust.method=adjust.method)
 
     class(ci)<- c("confint.global", "twophase")
@@ -296,14 +296,14 @@ confint.threephase<- function(object, parm, level = 0.95, adjust.method="none", 
     #-----------#
 
     # calculating the lower and upper confidence intervals based on the external variance:
-    ci.lower.g<- object$estimation$estimate - (t.val * sqrt(object$estimation$g_variance))
-    ci.upper.g<- object$estimation$estimate + (t.val * sqrt(object$estimation$g_variance))
+    ci_lower_g<- object$estimation$estimate - (t.val * sqrt(object$estimation$g_variance))
+    ci_upper_g<- object$estimation$estimate + (t.val * sqrt(object$estimation$g_variance))
 
     # calculating the lower and upper confidence intervals based on the design-based variance:
-    ci.lower.ext<- object$estimation$estimate - (t.val * sqrt(object$estimation$ext_variance))
-    ci.upper.ext<- object$estimation$estimate + (t.val * sqrt(object$estimation$ext_variance))
+    ci_lower_ext<- object$estimation$estimate - (t.val * sqrt(object$estimation$ext_variance))
+    ci_upper_ext<- object$estimation$estimate + (t.val * sqrt(object$estimation$ext_variance))
 
-    ci<- list(ci=data.frame(area=object$estimation$area, estimate=object$estimation$estimate, ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
+    ci<- list(ci=data.frame(area=object$estimation$area, estimate=object$estimation$estimate, ci_lower_ext, ci_upper_ext, ci_lower_g, ci_upper_g),
               level=orig.level, adjust.method=adjust.method)
 
     class(ci)<- c("confint.smallarea", "threephase")
@@ -325,13 +325,13 @@ confint.threephase<- function(object, parm, level = 0.95, adjust.method="none", 
 
     t.val<- qt(p = 1-( (1-level)/2 ), df = n2 - length(all.vars(object$input$formula.s1)[-1])) # that's however not recommended by Daniel,
                                                                                                  # see Article Crfr, Threephase, page 387
-    ci.lower.g<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["g_variance"]]))
-    ci.upper.g<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["g_variance"]]))
+    ci_lower_g<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["g_variance"]]))
+    ci_upper_g<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["g_variance"]]))
 
-    ci.lower.ext<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["ext_variance"]]))
-    ci.upper.ext<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["ext_variance"]]))
+    ci_lower_ext<- object$estimation[["estimate"]] - (t.val * sqrt(object$estimation[["ext_variance"]]))
+    ci_upper_ext<- object$estimation[["estimate"]] + (t.val * sqrt(object$estimation[["ext_variance"]]))
 
-    ci<- list(ci=data.frame(estimate=object$estimation[["estimate"]], ci.lower.ext, ci.upper.ext, ci.lower.g, ci.upper.g),
+    ci<- list(ci=data.frame(estimate=object$estimation[["estimate"]], ci_lower_ext, ci_upper_ext, ci_lower_g, ci_upper_g),
               level=orig.level,adjust.method=adjust.method)
 
     class(ci)<- c("confint.global", "threepase")
