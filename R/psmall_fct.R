@@ -27,6 +27,7 @@ psmall_fct<- function(formula, data, phase_id, cluster, small_area, boundary_wei
   Z_bar_1G.list <- as.list(as.data.frame(t(unextended[["Z_bar_1G"]][,-1])))
   coefficients.list <- as.list(as.data.frame(t(unextended[["coefficients"]][,-1])))
   n2G.list <- as.list(unextended[["estimation"]][["n2G"]])
+  n1G.list <- as.list(unextended[["estimation"]][["n1G"]])
   R_bar.list <- as.list(unextended[["mean_Rc_x_hat_G"]][["mean_Rc_x_hat_G"]])
   Mx_s2G_bar.list <- lapply(unextended[["Mx_s2G"]], FUN=mean)
 
@@ -34,16 +35,25 @@ psmall_fct<- function(formula, data, phase_id, cluster, small_area, boundary_wei
   # warnings:
   if (any(unlist(n2G.list) == 1)) {warning("n2G for at least one Small Area is 1. Numerical calculation of 'psmall' not possible, set to 'NaN'")}
   if (any(unlist(n2G.list) == 0)) {warning("n2G for at least one Small Area is 0. 'psmall' - estimation not possible, set to 'NA'")}
-
+  if (any(unlist(n1G.list) == 1)) {
+    warning("n1G for at least one Small Area is 1. Numerical calculation of 'psmall' not possible, set to 'NA'")
+    ind.list<- which(n1G.list == 1)
+      for (k in 1:length(ind.list)){
+        ind.list.k<- ind.list[k]
+        unextended[["cov_Z_bar_1G"]][[ind.list.k]]<- matrix(NaN, nrow = length(coefficients.list[[ind.list.k]]),
+                                                                 ncol = length(coefficients.list[[ind.list.k]]))
+      }
+    rm(ind.list, ind.list.k)
+  }
 
 
   # calculate variance of small area estimator:
   term1 <- mapply(function(Z, SB){t(as.matrix(Z)) %*% as.matrix(SB) %*% as.matrix(Z)}, Z=Z_bar_1G.list, SB=unextended[["cov_coef"]])
   # term2 only exists in the non-exhaustive case (i.e. if 'exhaustive'=NA):
   if(all(is.na(exhaustive))){
-  term2 <- mapply(function(B, SZ){t(as.matrix(B)) %*% as.matrix(SZ) %*% as.matrix(B)}, B=coefficients.list, SZ=unextended[["cov_Z_bar_1G"]])
+     term2<- mapply(function(B, SZ){t(as.matrix(B)) %*% as.matrix(SZ) %*% as.matrix(B)}, B=coefficients.list, SZ=unextended[["cov_Z_bar_1G"]])
   } else {
-  term2<- 0
+    term2<- 0
   }
   term3 <- mapply(function(n, R, R_bar, M, M_bar){    (1/(n*(n-1))) * sum( (M/M_bar)^2 * (R-R_bar)^2 ) },
                   n=n2G.list,

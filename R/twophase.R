@@ -137,7 +137,7 @@
 #'
 #' @references Mandallaz, D. (2007). \emph{Sampling techniques for forest inventories.} Chapter 4. CRC Press.
 #' @references Mandallaz, D. (2013). \emph{Design-based properties of some small-area estimators in forest inventory with two-phase sampling.} Can. J. For. Res. 43: 441-449
-#' @references Mandallaz, D. and Hill, A. and Massey, A. (2016). \emph{Design-based properties of some small-area estimators in forest inventory with two-phase sampling.} ETH Zurich, Department of Environmental Systems Science,Tech. rep. Available from http://e-collection.library.ethz.ch.
+#' @references Mandallaz, D. and Hill, A. and Massey, A. (2016). \emph{Design-based properties of some small-area estimators in forest inventory with two-phase sampling.} ETH Zurich, Department of Environmental Systems Science,Tech. rep. Available from \url{http://e-collection.library.ethz.ch}.
 #'
 #' @example examples/example_twophase_estimations_long.R
 #'

@@ -121,4 +121,3 @@ confint(op.clust.a)
 \references{
 Mandallaz, D. (2007). \emph{Sampling techniques for forest inventories.} Chapter 4. CRC Press.
 }
-

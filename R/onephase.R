@@ -197,16 +197,35 @@ onephase <- function(formula, data,
       # sample size:
       n2<- nrow(data.terr)
 
-      # estimations:
-      estimate<- mean(data.terr[[response]])
-      variance<- (1/n2)*var(data.terr[[response]])
+      # check if any terrestrial data available:
+      if (n2 == 0){
 
+        warning("Estimation not possible, set to 'NA': Domain does not contain any terrestrial data", call. = F)
 
-      # summarize sample size info:
-      samplesizes<- n2
-      names(samplesizes)<- "n2"
+        estimation<- data.frame(estimate=NA, variance=NA, n2=n2)
 
-      estimation<- data.frame(estimate=estimate, variance=variance, n2=n2)
+        # summarize sample size info:
+        samplesizes<- n2
+        names(samplesizes)<- "n2"
+
+      } else {
+
+        # estimations:
+        estimate<- mean(data.terr[[response]])
+        variance<- (1/n2)*var(data.terr[[response]])
+
+        if(n2 < 2){
+          warning("Variance estimation not possible, set to 'NA': Domain contains only one cluster", call. = F)
+          variance<- NA
+        }
+
+        # summarize sample size info:
+        samplesizes<- n2
+        names(samplesizes)<- "n2"
+
+        estimation<- data.frame(estimate=estimate, variance=variance, n2=n2)
+
+      }
 
     }
 
@@ -217,30 +236,49 @@ onephase <- function(formula, data,
       # sample size:
       n2<- nrow(data.terr)
 
-      # get on cluster level:
-      cluster_weights<- aggregate(data.terr[[response]], list(cluster = data.terr[,cluster]), length) # the M(x) for sample s2
-      names(cluster_weights)[2]<- "Mx"
+      if (n2 == 0){
 
-      # plot sample size:
-      n2_clusters<- nrow(cluster_weights)
+        warning("Estimation not possible, set to 'NA': Domain does not contain any terrestrial data", call. = F)
 
-      # local densities on cluster level:
-      cluster_locdens<- aggregate(data.terr[[response]], list(cluster = data.terr[,cluster]), mean)
-      names(cluster_locdens)[2]<- response
+        estimation<- data.frame(estimate=NA, variance=NA, n2=n2)
 
-      # merge locdens and Mx:
-      est.dat<- merge(cluster_locdens, cluster_weights, by=cluster)
+        # summarize sample size info:
+        samplesizes<- data.frame(cbind ( 0,  n2))
+        colnames(samplesizes)<- c("n2_clust", "n2")
+        rownames(samplesizes)<- "plots"
 
-      # estimations:
-      estimate<- weighted.mean(est.dat[[response]], w = est.dat[["Mx"]])
-      variance<- (1/(n2_clusters*(n2_clusters-1))) * sum( ((est.dat[["Mx"]] / mean(est.dat[["Mx"]]))^2) * ((est.dat[[response]] - estimate)^2) )
+      } else {
 
-      # summarize sample size info:
-      samplesizes<- data.frame(cbind ( n2_clusters,  n2))
-      colnames(samplesizes)<- c("n2_clust", "n2")
-      rownames(samplesizes)<- "plots"
+        # get on cluster level:
+        cluster_weights<- aggregate(data.terr[[response]], list(cluster = data.terr[,cluster]), length) # the M(x) for sample s2
+        names(cluster_weights)[2]<- "Mx"
 
-      estimation<- data.frame(estimate=estimate, variance=variance, n2=samplesizes$n2_clust)
+        # plot sample size:
+        n2_clusters<- nrow(cluster_weights)
+
+        # local densities on cluster level:
+        cluster_locdens<- aggregate(data.terr[[response]], list(cluster = data.terr[,cluster]), mean)
+        names(cluster_locdens)[2]<- response
+
+        # merge locdens and Mx:
+        est.dat<- merge(cluster_locdens, cluster_weights, by=cluster)
+
+        # estimations:
+        estimate<- weighted.mean(est.dat[[response]], w = est.dat[["Mx"]])
+        variance<- (1/(n2_clusters*(n2_clusters-1))) * sum( ((est.dat[["Mx"]] / mean(est.dat[["Mx"]]))^2) * ((est.dat[[response]] - estimate)^2) )
+
+        if(n2_clusters < 2){
+          warning("Variance estimation not possible, set to 'NA': Domain contains only one cluster", call. = F)
+          variance<- NA
+        }
+
+        # summarize sample size info:
+        samplesizes<- data.frame(cbind ( n2_clusters,  n2))
+        colnames(samplesizes)<- c("n2_clust", "n2")
+        rownames(samplesizes)<- "plots"
+
+        estimation<- data.frame(estimate=estimate, variance=variance, n2=samplesizes$n2_clust)
+      }
 
     }
 

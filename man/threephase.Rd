@@ -353,6 +353,5 @@ Mandallaz, D. (2014). \emph{A three-phase sampling extension of the generalized 
 
 Massey, A. and Mandallaz, D. and Lanz, A. (2014). \emph{Integrating remote sensing and past inventory data under the new annual design of the Swiss National Forest Inventory using three-phase design-based regression estimation.} Can. J. For. Res. 44(10): 1177-1186
 
-Mandallaz, D. (2013). \emph{Regression estimators in forest inventories with three-phase sampling and two multivariate components of auxiliary information.} ETH Zurich, Department of Environmental Systems Science,Tech. rep. Available from http://e-collection.library.ethz.ch.
+Mandallaz, D. (2013). \emph{Regression estimators in forest inventories with three-phase sampling and two multivariate components of auxiliary information.} ETH Zurich, Department of Environmental Systems Science,Tech. rep. Available from \url{http://e-collection.library.ethz.ch}.
 }
-
