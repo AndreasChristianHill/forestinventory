@@ -51,10 +51,10 @@
 #'  \item{ci}{a \code{data.frame} containing the columns:
 #'                    \itemize{
 #'                    \item \code{area} the domain, i.e. small area
-#'                    \item \code{ci.lower.ext} the lower confidence limit based on the external variance
-#'                    \item \code{ci.upper.ext} the upper confidence limit based on the external variance
-#'                    \item \code{ci.lower.g}   the lower confidence limit based on the g-weight variance
-#'                    \item \code{ci.upper.g}   the upper confidence limit based on the g-weight variance
+#'                    \item \code{ci_lower_ext} the lower confidence limit based on the external variance
+#'                    \item \code{ci_upper_ext} the upper confidence limit based on the external variance
+#'                    \item \code{ci_lower_g}   the lower confidence limit based on the g-weight variance
+#'                    \item \code{ci_upper_g}   the upper confidence limit based on the g-weight variance
 #'                    }}
 #'  \item{level}{the applied confidence level}
 #'  \item{adjust.method}{the adjustment method applied to retrieve simultaneous confidence intervals}

@@ -1,15 +1,15 @@
 Package: forestinventory
 Type: Package
 Title: Design-Based Global and Small-Area Estimations for Multiphase Forest Inventories
-Version: 0.1.0.9000
-Date: 2016-07-06
-Authors@R:  c(person(given = c("Andreas"), family = "Hill",
-                     email = "forestinventory@gmx.ch", role = c("aut","cre")),
+Version: 0.2.0
+Date: 2017-05-19
+Authors@R: c(person(given = c("Andreas"), family = "Hill",
+                     email = "andreas.hill@usys.ethz.ch", role = c("aut","cre")),
               person(given = c("Alexander"), family = "Massey",
-                      email = "forestinventory@gmx.ch", role = c("aut")),
+                      email = "afmass@gmail.com", role = c("aut")),
               person(given = c("Daniel"), family = "Mandallaz", role = c("ctb"))
               )
-Maintainer: Andreas Hill <forestinventory@gmx.ch>
+Maintainer: Andreas Hill <andreas.hill@usys.ethz.ch>
 Description: Extensive global and small-area estimation procedures for multiphase
     forest inventories under the design-based Monte-Carlo approach are provided.
     The implementation includes estimators for simple and cluster sampling
@@ -25,4 +25,4 @@ LazyData: TRUE
 Imports: plyr (>= 1.8.3),
     stats,
     utils
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

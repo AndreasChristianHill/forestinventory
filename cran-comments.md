@@ -1,30 +1,24 @@
 ---
 title: "cran-comments"
 author: "Andreas Hill, Alexander Massey"
-date: "06 July 2016"
+date: "21 June 2017"
 ---
 
 
-## Resubmission
-This is a resubmission. In addition to the previous upload, we have:
-
-* removed an unwanted space in the DOI-specification in the DESCRIPTION
-
-* Specified the publications mentioned in the DESCRIPTION by giving
-  the respective DOIs (<DOI: .... >). Each referred DOI in the DESCRIPTION is
-  further specified within the DOCUMENTATION.
-
+## Second minor release
+This is a submission of a new (second) minor release of our package. 
 
 ## Test environments
-* local Windows 7 OS, R 3.2.3 
-* local Mac OS 10.11.5, R 3.2.4
-* local Ubuntu 16.04, R 3.2.3 
+* local Windows 7 OS, R 3.4.0
+* local Kubuntu 16.04, Kernel Version 4.4.0-78-generic, R 3.4.0
 * win-builder (devel and release)
 
 ## R CMD check results
 There were no ERRORS, WARNINGS
 
+
 There was one NOTE returned from win_builder:
+
 
 * Possibly mis-spelled words in DESCRIPTION:
     Mandallaz (17:34)
@@ -32,6 +26,11 @@ There was one NOTE returned from win_builder:
     multiphase (15:20)
     
   --> these are NO misspellings
+
+
+* We additionally changed the email adresses of the maintainer and one of 
+the contributors (we used a mailing list before which violated CRAN-policy)
+
 
 ## Downstream dependencies:
 There are currently no downstream dependencies for this package.
