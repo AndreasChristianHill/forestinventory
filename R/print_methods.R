@@ -285,5 +285,12 @@ print.confint.global<- function(x, ...){
 }
 
 
+#' @method print esttable
+#' @export
+print.esttable<- function(x, ...){
+  # print-method for estable-objects:
+  print(data.frame(x))
+}
+
 
 

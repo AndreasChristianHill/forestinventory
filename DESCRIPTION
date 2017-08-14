@@ -24,5 +24,7 @@ License: GPL (>= 2)
 LazyData: TRUE
 Imports: plyr (>= 1.8.3),
     stats,
-    utils
+    utils,
+    tidyr,
+    ggplot2
 RoxygenNote: 6.0.1
