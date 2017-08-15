@@ -8,66 +8,60 @@
 # key = "variance" or "ci"
 # ------------------------------------------------------------
 
-
 #' estTable
 #'
-#' \code{estTable} is used to calculate estimations based on double sampling under the
-#' \emph{model-assisted Monte Carlo approach}. A \emph{first phase} of auxiliary information
-#' (e.g. taken from remote sensing data) is used to generate model predictions based on multiple linear
-#' regression  using the method of ordinary least squares. A subsample of the first phase comprises
-#' the \emph{second phase} which contains terrestrial observations (i.e. the \emph{local densities}
-#' of the ground truth) that is used to correct for bias in the design-based sense.
-#' The estimation method is available for \emph{simple} and \emph{cluster sampling} and includes
-#' the special case where the first phase is based on an \emph{exhaustive} sample (i.e. a census).
-#' \emph{Small-area applications} are supported for synthetic estimation as well as two varieties
-#' of bias-corrected estimators: the traditional small-area estimator and an asymptotically
-#' equivalent version derived under Mandallaz's extended model approach.
+#' \code{estTable} can be used to compare the results of \code{\link{onephase}} to multiphase estimations
+#' (\code{\link{twophase}}, \code{\link{threephase}}). It restructures the estimation results into a table that can
+#' be used to plot the estimation results and provides the basis for further analysis.
 #'
-#' @param est.list
-#' @param key.var
-#' @param sae
-#' @param format
-#' @param vartypes
 #'
-#' @details Here come the details
-
-#' @return \code{estTable} returns ....
+#' @param est.list a \code{\link[base]{list}} object containing at least one multiphase estimation object created by
+#'        the \code{\link{twophase}} or code{\link{threephase}} function and the respective \code{\link{onephase}} estimation object.
 #'
-#' An object of class \code{"twophase"} returns a \code{list} of the following components:
+#' @param key.var Names of key and value columns to create in output. Can be set to \code{"variance"} (default) or \code{"ci"} for additionally
+#'        adding the confidence intervals of the estiamtes.
 #'
-#'  \item{input}{a \code{list} containing the function's inputs}
-#'  \item{estimation}{a data frame containing the following components:
-#'                   \itemize{
-#'                    \item \code{area:} the domain (only present if argument \code{areas} has been used)
-#'                    \item \code{estimate:} the point estimate
-#'                    \item \code{ext_variance:} the external variance of the point estimate that doesn't account for
-#'                                               fitting the model from the current inventory
-#'                    \item \code{g_variance:} the internal (g-weight) variance that accounts for
-#'                                               fitting the model from the current inventory
-#'                    \item \code{n1} the first phase sample size of plots
-#'                    \item \code{n2} the second phase (i.e. terrestrial) sample size of plots
-#'                    \item \code{n1G} the first phase sample size in the small area
-#'                    \item \code{n2G} the second phase (i.e. terrestrial) sample size in the small area
-#'                    \item \code{r.squared} the R squared of the linear model
-#'                    }}
-#'  \item{samplesizes}{a \code{\link[base]{data.frame}} summarizing all samplesizes: in case of cluster sampling both,
-#'                     the number of individual plots and the nuber of clusters is reported.}
-#'  \item{coefficients}{the linear model coefficients}
-#'  \item{cov_coef}{the design-based covariance matrix of the model coefficients}
-#'  \item{Z_bar_1G}{the estimated auxiliary means of \code{formula} based on the first phase.
-#'                  If the first phase is exhaustive, these are the true auxiliary means specified in the input-argument \code{exhaustive}.}
-#'  \item{cov_Z_bar_1G}{the covariance matrix of \code{Z_bar_1G}}
-#'  \item{Rc_x_hat_G}{the small-area residuals at either the plot level or cluster level depending on the call}
-#'  \item{Rc_x_hat}{the residuals at either the plot level or cluster level depending on the call}
-#'  \item{Yx_s2G}{the local densities in the small area}
-#'  \item{Mx_s2G}{the cluster weights in the small area}
-#'  \item{mean_Rc_x_hat_G}{the mean residual (weighted mean in the case of cluster sampling) in the small area}
-#'  \item{mean_Rc_x_hat}{the mean residual (weighted mean in the case of cluster sampling)}
-#'  \item{warn.messages}{logical indicating if warning messages were issued}
+#' @param sae an object of type \code{\link[base]{logical}}. Has to be set to \code{TRUE} if results of small area estimations are passed to \code{Esttable}.
+#'        Defaults to \code{FALSE}.
+#'
+#' @param format Specifying whether the output table should be in \code{"long"} or \code{"wide"} format.
+#'
+#' @param vartypes Specifiying the variances that should be included in the estimation table. Has to be specified as a \code{character} vector. The full set is
+#'        \code{c("variance", "ext_variance", "g_variance")}.
+#'
+#'
+#' @return \code{estTable} returns a \code{list} of the following components:
+#'
+#'  \itemize{
+#'     \item \code{area:} in case of small area estiamtions: the name of the small area
+#'     \item \code{estimate:} the point estimates
+#'     \item \code{vartype:} the type of variance
+#'     \item \code{variance:} the variance values
+#'     \item \code{std:} the standard errors (square root of variance values)
+#'     \item \code{error:} the estimation errors defined as \eqn{\frac{standard error}{point estimate}}
+#'     \item \code{domain:} indicating if current row belongs to a \code{smallarea} or \code{global} estimation
+#'     \item \code{estimator:} the estimator that that was applied
+#'     \item \code{method:} the estimation method that was applied
+#'     \item \code{n2:} terrestrial sample size in entire inventory area
+#'     \item \code{n1:} first phase sample size in entire inventory area
+#'     \item \code{n0:} in case of \code{threephase} estimations: zero phase sample size in entire inventory area
+#'     \item \code{n1:} first phase sample size in entire inventory area
+#'     \item \code{n0:} in case of \code{threephase} estimations: zero phase sample size in entire inventory area
+#'     \item \code{n2G:} terrestrial sample size in small area
+#'     \item \code{n1G:} first phase sample size in small area
+#'     \item \code{n0G:} in case of \code{threephase} estimations: zero phase sample size in small area
+#'     \item \code{r.squared: coefficient of determination of regression model}
+#'     \item \code{r.squared_reduced:} in case of \code{threephase} estimations: coefficient of determination of reduced regression model
+#'     \item \code{r.squared_full:} in case of \code{threephase} estimations: coefficient of determination of full regression model
+#'     \item \code{ci_lower:} if \code{key.var="ci"}: lower confidence limit
+#'     \item \code{ci_upper:} if \code{key.var="ci"}: upper confidence limit
+#'     \item \code{ci_upper:} if \code{key.var="ci"}: upper confidence limit
+#'  }
 #'
 #' @note
-#' An estimation object of class \code{onephase} is mandatory
-#' @example examples/example_twophase_estimations_long.R
+#' An estimation object of class \code{onephase} as input is mandatory
+#'
+#' @example examples/example_estTable.R
 #'
 #' @import tidyr
 #' @import stats
@@ -78,14 +72,15 @@
 # -----------------------------------------------------------------------------#
 # FUNCTION STARTS HERE:
 
+
 estTable<- function(est.list, key.var = "variance", sae=FALSE, format = "long",
                      vartypes=c("variance", "ext_variance", "g_variance")){
 
   # check input:
   inputclasses<- sapply(est.list, FUN = function(x){class(x)})
   if (!c("onephase") %in% inputclasses){stop("'onephase'-object missing for function estTable()")}
-  if (!all(unlist(inputclasses) %in% c("onephase", "twophase", "global", "smallarea"))){
-    ndf<- unlist(inputclasses)[!unlist(inputclasses) %in% c("onephase", "twophase", "global", "smallarea")]
+  if (!all(unlist(inputclasses) %in% c("onephase", "twophase", "threephase", "global", "smallarea"))){
+    ndf<- unlist(inputclasses)[!unlist(inputclasses) %in% c("onephase", "twophase", "threephase", "global", "smallarea")]
     stop(paste("class '", ndf, "' not valid as input for function estTable()", sep = ""))}
 
   # get number of input objects:
@@ -102,12 +97,12 @@ estTable<- function(est.list, key.var = "variance", sae=FALSE, format = "long",
     }
 
     if (length(class( est.list[[j]])) > 1){
-      est.list[[j]]$estimation$estimator<- as.factor(paste(as.character(class( est.list[[j]])[2])))
+      est.list[[j]]$estimation$method<- as.factor(paste(as.character(class( est.list[[j]])[2])))
     } else{
-      est.list[[j]]$estimation$estimator<- as.factor(paste(as.character(class( est.list[[j]])[1])))
+      est.list[[j]]$estimation$method<- as.factor(paste(as.character(class( est.list[[j]])[1])))
     }
 
-    est.list[[j]]$estimation$method <- as.factor(est.list[[j]]$input$method)
+    est.list[[j]]$estimation$estimator <- as.factor(est.list[[j]]$input$method)
 
   }
 
@@ -132,6 +127,7 @@ estTable<- function(est.list, key.var = "variance", sae=FALSE, format = "long",
   # ---------------------------- #
   # restructure dataset for small area objects:
 
+  ## SAE
   if(sae & format == "long"){
 
     for (i in 2:n.obj){
@@ -168,7 +164,7 @@ estTable<- function(est.list, key.var = "variance", sae=FALSE, format = "long",
 
     # Restructure dataframe:
     if(key.var=="variance"){
-      cdat<- gather(data = dn, key = vartype, value = variance, ext_variance, g_variance, variance)
+      cdat<- gather_(data = dn, key_col = "vartype", value_col="variance", gather_cols=c("ext_variance", "g_variance", "variance"))
       cdat$vartype<- as.factor(cdat$vartype)
       cdat<- cdat[!is.na(cdat$variance), ]
       # calculate and add estimation error in [%]:
@@ -177,24 +173,25 @@ estTable<- function(est.list, key.var = "variance", sae=FALSE, format = "long",
       cdat$error<- round(100*cdat$error, digits = 2)
 
       # Reihenfolge (sieht schöner aus):
-      my.order<- c("area", "estimate", "vartype", "variance", "std", "error", "domain", "estimator", "method",
+      my.order<- c("area", "estimate", "vartype", "variance", "std", "error", "domain", "method", "estimator",
                    "n2", "n2G", "n1", "n1G", "n0", "n0G", "r.squared", "r.squared_reduced", "r.squared_full")
 
       if("area" %in% colnames(cdat)){
-        cdat<- cdat[order(cdat$area, cdat$estimator), na.omit(match( my.order, names(cdat)))]
+        cdat<- cdat[order(cdat$area, cdat$method), na.omit(match( my.order, names(cdat)))]
         rownames(cdat)<- seq(1:nrow(cdat))
       } else {
-        cdat<- cdat[order(cdat$estimator), na.omit(match( my.order, names(cdat)))]
+        cdat<- cdat[order(cdat$method), na.omit(match( my.order, names(cdat)))]
         rownames(cdat)<- seq(1:nrow(cdat))
       }
     }
 
 
     if(key.var=="ci"){
-      cdat<-  dn %>%
-        gather(key, value, ci_lower_op, ci_upper_op, ci_lower_ext, ci_upper_ext, ci_lower_g, ci_upper_g) %>%
-        extract(key, c("question", "vartype"), "(c._.....)\\_(.*)") %>%
-        spread(question, value)
+      cdat<- gather_(data = dn, key_col = "vartype", value_col="value",
+                     gather_cols=c("ci_lower_op", "ci_upper_op", "ci_lower_ext", "ci_upper_ext", "ci_lower_g", "ci_upper_g"))
+      cdat<- extract_(data=cdat, col= "vartype", into=c("question","vartype"), regex="(c._.....)\\_(.*)")
+      cdat<- spread_(data = cdat, key_col="question", value_col = "value")
+
       cdat$vartype[cdat$vartype=="op"]<- "variance"
       cdat$vartype[cdat$vartype=="ext"]<- "ext_variance"
       cdat$vartype[cdat$vartype=="g"]<- "g_variance"
@@ -219,7 +216,7 @@ estTable<- function(est.list, key.var = "variance", sae=FALSE, format = "long",
   # ---------------------------- #
   # ---------------------------- #
 
-
+  ## NOT SAE
   if(!sae & format == "long"){
 
     for (i in 2:n.obj){
@@ -256,7 +253,7 @@ estTable<- function(est.list, key.var = "variance", sae=FALSE, format = "long",
 
     # Restructure dataframe:
     if(key.var=="variance"){
-      cdat<- gather(data = dn, key = vartype, value = variance, ext_variance, g_variance, variance)
+      cdat<- gather_(data = dn, key_col = "vartype", value_col="variance", gather_cols=c("ext_variance", "g_variance", "variance"))
       cdat$vartype<- as.factor(cdat$vartype)
       cdat<- cdat[!is.na(cdat$variance), ]
       # calculate and add estimation error in [%]:
@@ -264,23 +261,24 @@ estTable<- function(est.list, key.var = "variance", sae=FALSE, format = "long",
       cdat$error<- round(100*cdat$std, digits = 2)
 
       # Reihenfolge (sieht schöner aus):
-      my.order<- c("area", "estimate", "vartype", "variance", "std", "error", "domain", "estimator", "method",
+      my.order<- c("area", "estimate", "vartype", "variance", "std", "error", "domain", "method", "estimator",
                    "n2", "n2G", "n1", "n1G", "n0", "n0G", "r.squared", "r.squared_reduced", "r.squared_full")
 
       if("area" %in% colnames(cdat)){
-        cdat<- cdat[order(cdat$area, cdat$estimator), na.omit(match( my.order, names(cdat)))]
+        cdat<- cdat[order(cdat$area, cdat$method), na.omit(match( my.order, names(cdat)))]
         rownames(cdat)<- seq(1:nrow(cdat))
       } else {
-        cdat<- cdat[order(cdat$estimator), na.omit(match( my.order, names(cdat)))]
+        cdat<- cdat[order(cdat$method), na.omit(match( my.order, names(cdat)))]
         rownames(cdat)<- seq(1:nrow(cdat))
       }
     }
 
     if(key.var=="ci"){
-      cdat<-  dn %>%
-        gather(key, value, ci_lower_op, ci_upper_op, ci_lower_ext, ci_upper_ext, ci_lower_g, ci_upper_g) %>%
-        extract(key, c("question", "vartype"), "(c._.....)\\_(.*)") %>%
-        spread(question, value)
+      cdat<- gather_(data = dn, key_col = "vartype", value_col="value",
+                     gather_cols=c("ci_lower_op", "ci_upper_op", "ci_lower_ext", "ci_upper_ext", "ci_lower_g", "ci_upper_g"))
+      cdat<- extract_(data=cdat, col= "vartype", into=c("question","vartype"), regex="(c._.....)\\_(.*)")
+      cdat<- spread_(data = cdat, key_col="question", value_col = "value")
+
       cdat$vartype[cdat$vartype=="op"]<- "variance"
       cdat$vartype[cdat$vartype=="ext"]<- "ext_variance"
       cdat$vartype[cdat$vartype=="g"]<- "g_variance"
@@ -301,9 +299,12 @@ estTable<- function(est.list, key.var = "variance", sae=FALSE, format = "long",
   } # end of "long"-formatting global-objects
 
 
-
-
 } # end of function
 
 
-# -------------------------------------------------------- #
+
+
+
+
+
+
