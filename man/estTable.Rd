@@ -19,8 +19,8 @@ Defaults to \code{FALSE}.}
 
 \item{format}{Specifying whether the output table should be in \code{"long"} or \code{"wide"} format.}
 
-\item{vartypes}{Specifiying the variances that should be included in the estimation table. Has to be specified as a \code{character} vector. The full set is
-\code{c("variance", "ext_variance", "g_variance")}.}
+\item{vartypes}{Specifiying the variances that should be included in the estimation table. Has to be specified as a \code{character} vector. The full set
+contains \code{"variance"}, \code{"ext_variance"} and \code{"g_variance"}.}
 }
 \value{
 \code{estTable} returns a \code{list} of the following components:
@@ -31,7 +31,7 @@ Defaults to \code{FALSE}.}
     \item \code{vartype:} the type of variance
     \item \code{variance:} the variance values
     \item \code{std:} the standard errors (square root of variance values)
-    \item \code{error:} the estimation errors defined as \eqn{\frac{standard error}{point estimate}}
+    \item \code{error:} the estimation errors defined as the ratio between \emph{standard error} and \emph{point estimate}
     \item \code{domain:} indicating if current row belongs to a \code{smallarea} or \code{global} estimation
     \item \code{estimator:} the estimator that that was applied
     \item \code{method:} the estimation method that was applied
@@ -47,7 +47,6 @@ Defaults to \code{FALSE}.}
     \item \code{r.squared_reduced:} in case of \code{threephase} estimations: coefficient of determination of reduced regression model
     \item \code{r.squared_full:} in case of \code{threephase} estimations: coefficient of determination of full regression model
     \item \code{ci_lower:} if \code{key.var="ci"}: lower confidence limit
-    \item \code{ci_upper:} if \code{key.var="ci"}: upper confidence limit
     \item \code{ci_upper:} if \code{key.var="ci"}: upper confidence limit
  }
 }
