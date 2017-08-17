@@ -20,14 +20,14 @@ if more then one variance type has been calculated in the multiphase estimation 
 
  \itemize{
     \item \code{area:} in case of small area estimation: the name of the small area
-    \item \code{std_onephase:} standard error of the \code{\link{onephase}} estimation
-    \item \code{std_multiphase:} smallest standard error among the (set of) multiphase estimations stored in \code{esttable.obj}
-    \item \code{estimator:} multiphase estimator with the smallest standard error
-    \item \code{method:} estimation Method of the multiphase estimator with the smallest standard error
+    \item \code{var_onephase:} standard error of the \code{\link{onephase}} estimation
+    \item \code{var_multiphase:} smallest variance among the (set of) multiphase estimations stored in \code{esttable.obj}
+    \item \code{estimator:} multiphase estimator with the smallest variance
+    \item \code{method:} estimation Method of the multiphase estimator with the smallest variance
     \item \code{gain:} the \emph{gain} is the reduction (if value is positive) or possibly also the increase (if value is negative)
-                       in standard error when applying the multiphase as alternative to the onephase estimation
-    \item \code{perc.of.onephase:} ratio between the smallest multiphase standard error and the onephase standard error
-    \item \code{rel.eff:} the \emph{relative efficiency} defined as the ratio between the onephase standard error and the multiphase standard error
+                       in variance when applying the multiphase as alternative to the onephase estimation
+    \item \code{rel.eff:} the \emph{relative efficiency} defined as the ratio between the onephase variance and the multiphase variance
+    %\item \code{perc.of.onephase:} ratio between the smallest multiphase standard error and the onephase standard error
  }
 }
 \description{
@@ -36,13 +36,10 @@ and returns a validation of which multiphase method and estimator performed best
 to the onephase estimation (baseline) in terms of estimation precision.
 }
 \note{
-The standard error is defined as the square root of the estimated variance
-
-The \emph{gain} can be interpreted as: "The multiphase estimation procedure leads a xx % reduction in standard error compared to the
+The \emph{gain} can be interpreted as: "The multiphase estimation procedure leads a \code{gain} \% reduction in variance compared to the
 onephase procedure".
 
-The \emph{relative efficiency} can be interpreted as: "The terrestrial sample size would have to be 'rel.eff' times larger in order to achieve the
-mutiphase estimation precision (in terms of standard error) with the onephase estimation procedure".
+The \emph{relative efficiency} can be interpreted as: "Using the onephase estimation procedure, the terrestrial sample size would have to be \code{rel.eff} times larger in order to achieve the same precision (in terms of variance) as the mutiphase estimation procedure".
 }
 \examples{
 

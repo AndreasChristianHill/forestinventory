@@ -9,7 +9,7 @@ estTable(est.list, key.var = "variance", sae = FALSE, format = "long",
 }
 \arguments{
 \item{est.list}{a \code{\link[base]{list}} object containing at least one multiphase estimation object created by
-the \code{\link{twophase}} or code{\link{threephase}} function and the respective \code{\link{onephase}} estimation object.}
+the \code{\link{twophase}} or \code{\link{threephase}} function and the respective \code{\link{onephase}} estimation object.}
 
 \item{key.var}{Names of key and value columns to create in output. Can be set to \code{"variance"} (default) or \code{"ci"} for additionally
 adding the confidence intervals of the estiamtes.}

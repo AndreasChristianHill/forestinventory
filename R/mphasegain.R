@@ -31,25 +31,22 @@
 #'
 #'  \itemize{
 #'     \item \code{area:} in case of small area estimation: the name of the small area
-#'     \item \code{std_onephase:} standard error of the \code{\link{onephase}} estimation
-#'     \item \code{std_multiphase:} smallest standard error among the (set of) multiphase estimations stored in \code{esttable.obj}
-#'     \item \code{estimator:} multiphase estimator with the smallest standard error
-#'     \item \code{method:} estimation Method of the multiphase estimator with the smallest standard error
+#'     \item \code{var_onephase:} standard error of the \code{\link{onephase}} estimation
+#'     \item \code{var_multiphase:} smallest variance among the (set of) multiphase estimations stored in \code{esttable.obj}
+#'     \item \code{estimator:} multiphase estimator with the smallest variance
+#'     \item \code{method:} estimation Method of the multiphase estimator with the smallest variance
 #'     \item \code{gain:} the \emph{gain} is the reduction (if value is positive) or possibly also the increase (if value is negative)
-#'                        in standard error when applying the multiphase as alternative to the onephase estimation
-#'     \item \code{perc.of.onephase:} ratio between the smallest multiphase standard error and the onephase standard error
-#'     \item \code{rel.eff:} the \emph{relative efficiency} defined as the ratio between the onephase standard error and the multiphase standard error
+#'                        in variance when applying the multiphase as alternative to the onephase estimation
+#'     \item \code{rel.eff:} the \emph{relative efficiency} defined as the ratio between the onephase variance and the multiphase variance
+#'     %\item \code{perc.of.onephase:} ratio between the smallest multiphase standard error and the onephase standard error
 #'  }
 #'
 #' @note
 #'
-#' The standard error is defined as the square root of the estimated variance
-#'
-#' The \emph{gain} can be interpreted as: "The multiphase estimation procedure leads a xx % reduction in standard error compared to the
+#' The \emph{gain} can be interpreted as: "The multiphase estimation procedure leads a \code{gain} \% reduction in variance compared to the
 #' onephase procedure".
 #'
-#' The \emph{relative efficiency} can be interpreted as: "The terrestrial sample size would have to be 'rel.eff' times larger in order to achieve the
-#' mutiphase estimation precision (in terms of standard error) with the onephase estimation procedure".
+#' The \emph{relative efficiency} can be interpreted as: "Using the onephase estimation procedure, the terrestrial sample size would have to be \code{rel.eff} times larger in order to achieve the same precision (in terms of variance) as the mutiphase estimation procedure".
 #'
 #'
 #' @example examples/example_mphasegain.R
@@ -82,31 +79,31 @@ mphase.gain<- function(esttable.obj, pref.vartype = "g_variance", exclude.synth 
       ind.not.1ph<- est.tab$vartype %in% c(pref.vartype)
     }
 
-    std.1ph<- est.tab[ind.1ph, "std"]
+    var.1ph<- est.tab[ind.1ph, "variance"]
     est.tab.not1ph<- est.tab[ind.not.1ph,]
 
-    ind.best.multiph<- which.min(est.tab.not1ph[["std"]])[1]
+    ind.best.multiph<- which.min(est.tab.not1ph[["variance"]])[1]
 
-    best.mphase<- est.tab.not1ph[ind.best.multiph, c("estimator", "method", "std", "vartype")]
+    best.mphase<- est.tab.not1ph[ind.best.multiph, c("estimator", "method", "variance", "vartype")]
 
     if(all(!ind.1ph)){ # if no onephase is there
 
-      d<- data.frame(std_onephase = NA, std_multiphase = best.mphase$std,
+      d<- data.frame(var_onephase = NA, var_multiphase = best.mphase$variance,
                      estimator = best.mphase$estimator, method = best.mphase$method,
-                     gain = NA, perc.of.onephase = NA)
+                     gain = NA, rel.eff = NA)
     } else {
 
       # gain:
-      red.to.1ph<- round(100* (1 - (best.mphase[["std"]] / std.1ph)), digits = 1)
+      red.to.1ph<- round(100* (1 - (best.mphase[["variance"]] / var.1ph)), digits = 1)
 
-      perc.of.1phstd<- round(100*(best.mphase[["std"]] / std.1ph), digits = 1)
+      perc.of.1phvar<- round(100*(best.mphase[["variance"]] / var.1ph), digits = 1)
 
-      rel.eff<- std.1ph / best.mphase[["std"]]
+      rel.eff<- var.1ph / best.mphase[["variance"]]
 
       d<-
-        data.frame(std_onephase = std.1ph, std_multiphase = best.mphase$std,
-                   estimator = best.mphase$estimator, method = best.mphase$method,
-                   gain = red.to.1ph, perc.of.onephase = perc.of.1phstd, rel.eff = rel.eff)
+        data.frame(var_onephase = var.1ph, var_multiphase = best.mphase$variance,
+                   method = best.mphase$method, estimator = best.mphase$estimator,
+                   gain = red.to.1ph, rel.eff = rel.eff)
     }
 
   }
