@@ -4,18 +4,17 @@
 \alias{estTable}
 \title{estTable}
 \usage{
-estTable(est.list, key.var = "variance", sae = FALSE, format = "long",
+estTable(est.list, sae = FALSE, add.ci = TRUE, format = "long",
   vartypes = c("variance", "ext_variance", "g_variance"))
 }
 \arguments{
 \item{est.list}{a \code{\link[base]{list}} object containing at least one multiphase estimation object created by
 the \code{\link{twophase}} or \code{\link{threephase}} function and the respective \code{\link{onephase}} estimation object.}
 
-\item{key.var}{Names of key and value columns to create in output. Can be set to \code{"variance"} (default) or \code{"ci"} for additionally
-adding the confidence intervals of the estiamtes.}
-
 \item{sae}{an object of type \code{\link[base]{logical}}. Has to be set to \code{TRUE} if results of small area estimations are passed to \code{Esttable}.
 Defaults to \code{FALSE}.}
+
+\item{add.ci}{\code{logical}: Should confidence intervals be added? Defaults to \code{TRUE}.}
 
 \item{format}{Specifying whether the output table should be in \code{"long"} or \code{"wide"} format.}
 
@@ -46,8 +45,8 @@ contains \code{"variance"}, \code{"ext_variance"} and \code{"g_variance"}.}
     \item \code{r.squared: coefficient of determination of regression model}
     \item \code{r.squared_reduced:} in case of \code{threephase} estimations: coefficient of determination of reduced regression model
     \item \code{r.squared_full:} in case of \code{threephase} estimations: coefficient of determination of full regression model
-    \item \code{ci_lower:} if \code{key.var="ci"}: lower confidence limit
-    \item \code{ci_upper:} if \code{key.var="ci"}: upper confidence limit
+    \item \code{ci_lower:} if \code{add.ci=TRUE}: lower confidence limit
+    \item \code{ci_upper:} if \code{add.ci=TRUE}: upper confidence limit
  }
 }
 \description{
@@ -81,11 +80,9 @@ sae.3p.est <- threephase(formula.s0 =  tvol ~ mean,
                          small_area=list(sa.col = "smallarea", areas = c("A", "B", "C", "D"),
                                          unbiased = TRUE))
 
-## create estimation table:
-sae.table<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est),
+## create estimation table with confidence intervals:
+sae.table<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est), add.ci=TRUE,
                      sae = TRUE, vartypes = c("variance", "g_variance",  "ext_variance"))
 
-## create estimation table with confidence intervals:
-sae.table.ci<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est), key.var = "ci",
-                        sae = TRUE, vartypes = c("variance", "g_variance",  "ext_variance"))
+sae.table.df<- as.data.frame(sae.table)
 }

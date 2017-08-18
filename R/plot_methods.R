@@ -93,7 +93,7 @@ plot.esttable<- function(x, yvar="error", ncol=5, yscale.free=TRUE,...){
 
       p<- ggplot(data=dat, aes_q(x=quote(method), y=quote(estimate), fill=quote(methest))) +
         geom_bar(colour="black", stat="identity", position=position_dodge()) +
-        geom_errorbar(aes(ymax=ci_upper, ymin=ci_lower), position=position_dodge(width=0.9), width=0.25, lwd=0.75) +
+        geom_errorbar(aes_q(ymax=quote(ci_upper), ymin=quote(ci_lower)), position=position_dodge(width=0.9), width=0.25, lwd=0.75) +
         xlab("Estimation Method") +
         scale_fill_manual("Estimator", values=colors.temp)
     }
@@ -107,7 +107,7 @@ plot.esttable<- function(x, yvar="error", ncol=5, yscale.free=TRUE,...){
 
       p<- ggplot(data=dat, aes_q(x=quote(method), y=quote(estimate), fill=quote(methest))) +
         geom_bar(colour="black", stat="identity", position=position_dodge()) +
-        geom_errorbar(aes(ymax=ci_upper, ymin=ci_lower), position=position_dodge(width=0.9), width=0.25, lwd=0.75) +
+        geom_errorbar(aes_q(ymax=quote(ci_upper), ymin=quote(ci_lower)), position=position_dodge(width=0.9), width=0.25, lwd=0.75) +
         xlab("Estimation Method") +
         facet_wrap( ~ area, ncol=ncol, scales = scaleset) +
         scale_fill_manual("Estimator", values=colors.temp)

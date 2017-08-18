@@ -43,13 +43,13 @@
 #'
 #' @note
 #'
-#' The \emph{gain} can be interpreted as: "The multiphase estimation procedure leads a \code{gain} \% reduction in variance compared to the
+#' The \emph{gain} can be interpreted as: "The multiphase estimation procedure leads to a \code{gain} \% reduction in variance compared to the
 #' onephase procedure".
 #'
 #' The \emph{relative efficiency} can be interpreted as: "Using the onephase estimation procedure, the terrestrial sample size would have to be \code{rel.eff} times larger in order to achieve the same precision (in terms of variance) as the mutiphase estimation procedure".
 #'
 #'
-#' @example examples/example_mphasegain.R
+#' % @example examples/example_mphasegain.R
 #'
 #' @import plyr
 #' @export

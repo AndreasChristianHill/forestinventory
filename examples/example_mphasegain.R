@@ -20,7 +20,7 @@ sae.2p.est2 <- twophase(formula = tvol ~ mean + stddev + max + q75, data = griso
 
 
 ## create estimation table:
-sae.table<- estTable(est.list = list(op.a, sae.2p.est, sae.2p.est2),
+sae.table<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est), add.ci=TRUE,
                      sae = TRUE, vartypes = c("variance", "g_variance",  "ext_variance"))
 
 

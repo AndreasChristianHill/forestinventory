@@ -36,38 +36,11 @@ and returns a validation of which multiphase method and estimator performed best
 to the onephase estimation (baseline) in terms of estimation precision.
 }
 \note{
-The \emph{gain} can be interpreted as: "The multiphase estimation procedure leads a \code{gain} \% reduction in variance compared to the
+The \emph{gain} can be interpreted as: "The multiphase estimation procedure leads to a \code{gain} \% reduction in variance compared to the
 onephase procedure".
 
 The \emph{relative efficiency} can be interpreted as: "Using the onephase estimation procedure, the terrestrial sample size would have to be \code{rel.eff} times larger in order to achieve the same precision (in terms of variance) as the mutiphase estimation procedure".
-}
-\examples{
-
-## run onephase estimation:
-op.a <- onephase(formula = tvol~1,
-                 data = grisons,
-                 phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
-                 area = list(sa.col = "smallarea", areas = c("A", "B", "C", "D")))
-
-## run small area twophase estimation:
-sae.2p.est <- twophase(formula = tvol ~ mean + stddev + max + q75,
-                       data = grisons,
-                       phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
-                       small_area = list(sa.col = "smallarea", areas = c("A", "B","C", "D"),
-                                         unbiased = TRUE))
-
-sae.2p.est2 <- twophase(formula = tvol ~ mean + stddev + max + q75, data = grisons,
-                        phase_id = list(phase.col = "phase_id_2p", terrgrid.id = 2),
-                        small_area = list(sa.col = "smallarea", areas = c("A", "B"),
-                                          unbiased = TRUE),
-                        psmall = TRUE)
 
 
-## create estimation table:
-sae.table<- estTable(est.list = list(op.a, sae.2p.est, sae.2p.est2),
-                     sae = TRUE, vartypes = c("variance", "g_variance",  "ext_variance"))
-
-
-# validate estimation results:
-mphase.gain(sae.table)
+% @example examples/example_mphasegain.R
 }

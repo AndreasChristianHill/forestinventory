@@ -48,20 +48,15 @@ sae.3p.est <- threephase(formula.s0 =  tvol ~ mean,
                                          unbiased = TRUE))
 
 ## create estimation table:
-sae.table<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est),
+sae.table<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est), add.ci=TRUE,
                      sae = TRUE, vartypes = c("variance", "g_variance",  "ext_variance"))
 
 ## plot estimation errors:
 plot(sae.table)
 
-
-## create estimation table with confidence intervals:
-sae.table.ci<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est), key.var = "ci",
-                        sae = TRUE, vartypes = c("variance", "g_variance",  "ext_variance"))
-
 ## plot point estimates and confidence intervals:
-#  Hint: --> load ggplot2 to add or modify graphic:
+#  Hint: --> use ggplot2 functions to modify graphic:
 library(ggplot2)
-plot(sae.table.ci, yvar = "estimate") +
+plot(sae.table, yvar = "estimate") +
    ylab("Timber Volume [m3/ha]")
 }

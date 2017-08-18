@@ -20,10 +20,8 @@ sae.3p.est <- threephase(formula.s0 =  tvol ~ mean,
                          small_area=list(sa.col = "smallarea", areas = c("A", "B", "C", "D"),
                                          unbiased = TRUE))
 
-## create estimation table:
-sae.table<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est),
+## create estimation table with confidence intervals:
+sae.table<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est), add.ci=TRUE,
                      sae = TRUE, vartypes = c("variance", "g_variance",  "ext_variance"))
 
-## create estimation table with confidence intervals:
-sae.table.ci<- estTable(est.list = list(op.a, sae.2p.est, sae.3p.est), key.var = "ci",
-                        sae = TRUE, vartypes = c("variance", "g_variance",  "ext_variance"))
+sae.table.df<- as.data.frame(sae.table)
