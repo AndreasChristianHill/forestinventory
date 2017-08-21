@@ -23,8 +23,6 @@
 #' @param sae an object of type \code{\link[base]{logical}}. Has to be set to \code{TRUE} if results of small area estimations are passed to \code{Esttable}.
 #'        Defaults to \code{FALSE}.
 #'
-#' @param format Specifying whether the output table should be in \code{"long"} or \code{"wide"} format.
-#'
 #' @param vartypes Specifiying the variances that should be included in the estimation table. Has to be specified as a \code{character} vector. The full set
 #'                 contains \code{"variance"}, \code{"ext_variance"} and \code{"g_variance"}.
 #'
@@ -72,7 +70,7 @@
 # NEW FUNCTION STARTS HERE:
 
 
-estTable<- function(est.list, sae=FALSE, add.ci=TRUE, format = "long",
+estTable<- function(est.list, sae=FALSE, add.ci=TRUE,
                     vartypes=c("variance", "ext_variance", "g_variance")){
 
   # check input:
@@ -105,30 +103,12 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE, format = "long",
 
   }
 
-  # ---------------------------- #
-
-  if(format == "wide"){
-
-    for (i in 2:n.obj){
-
-      if (i == 2) {dn<- est.list[[1]]$estimation}
-
-      # dn<- full_join(x = dn, y = est.list[[i]]$estimation, by = "area")
-      dn<- merge(x = dn, y = est.list[[i]]$estimation, by = "area")
-
-    }
-
-    return(dn)
-
-  } # end of "wide"-formatting
-
-
 
   # ---------------------------- #
   # restructure dataset for small area objects:
 
   ## SAE
-  if(sae & format == "long"){
+  if(sae){
 
     for (i in 2:n.obj){
 
@@ -197,9 +177,6 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE, format = "long",
       cdat.ci<- cdat.ci[!is.na(cdat.ci$ci_lower), ]
 
       # join confidence intervals to cdat:
-      # cdat<- full_join(x = cdat,
-      #                  y = cdat.ci[c("area","domain", "method", "estimator", "vartype","ci_lower", "ci_upper")],
-      #                  by = c("area","domain", "method", "estimator", "vartype"))
       cdat<- merge(x = cdat,
                        y = cdat.ci[c("area","domain", "method", "estimator", "vartype","ci_lower", "ci_upper")],
                        by = c("area","domain", "method", "estimator", "vartype"))
@@ -225,7 +202,7 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE, format = "long",
   # ---------------------------- #
 
   ## NOT SAE
-  if(!sae & format == "long"){
+  if(!sae){
 
     for (i in 2:n.obj){
 
@@ -271,14 +248,6 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE, format = "long",
       my.order<- c("area", "estimate", "vartype", "variance", "std", "error", "domain", "method", "estimator",
                    "n2", "n2G", "n1", "n1G", "n0", "n0G", "r.squared", "r.squared_reduced", "r.squared_full")
 
-      if("area" %in% colnames(cdat)){
-        cdat<- cdat[order(cdat$area, cdat$method), na.omit(match( my.order, names(cdat)))]
-        rownames(cdat)<- seq(1:nrow(cdat))
-      } else {
-        cdat<- cdat[order(cdat$method), na.omit(match( my.order, names(cdat)))]
-        rownames(cdat)<- seq(1:nrow(cdat))
-      }
-
     if(add.ci){
       cdat.ci<- gather_(data = dn, key_col = "vartype", value_col="value",
                      gather_cols=c("ci_lower_op", "ci_upper_op", "ci_lower_ext", "ci_upper_ext", "ci_lower_g", "ci_upper_g"))
@@ -292,12 +261,9 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE, format = "long",
       cdat.ci<- cdat.ci[!is.na(cdat.ci$ci_lower), ]
 
       # join confidence intervals to cdat:
-      # cdat<- full_join(x = cdat,
-      #                  y = cdat.ci[c("area","domain", "method", "estimator", "vartype","ci_lower", "ci_upper")],
-      #                  by = c("area","domain", "method", "estimator", "vartype"))
       cdat<- merge(x = cdat,
-                       y = cdat.ci[c("area","domain", "method", "estimator", "vartype","ci_lower", "ci_upper")],
-                       by = c("area","domain", "method", "estimator", "vartype"))
+                       y = cdat.ci[c("domain", "method", "estimator", "vartype","ci_lower", "ci_upper")],
+                       by = c("domain", "method", "estimator", "vartype"))
 
     }
 
