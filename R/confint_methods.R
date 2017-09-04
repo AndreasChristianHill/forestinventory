@@ -16,7 +16,7 @@
 #'
 #' \code{\link{onephase}}:
 #'
-#' Two-sided confidence intervals are computed based on the t-distribution with \code{n2 - p} \emph{degrees of freedom},
+#' Two-sided confidence intervals are computed based on the t-distribution with \code{n2 - 1} \emph{degrees of freedom},
 #' where \code{n2} is the number of terrestrial data in the respective inventory domain.
 #'
 #' \code{\link{twophase}}:

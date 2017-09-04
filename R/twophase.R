@@ -235,7 +235,7 @@ twophase <- function(formula, data, phase_id, cluster=NA,
   # Checking the nesting of the sample-design:
   # --> each s2-point muss have the complete set of auxvars (s1-info) available
 
-  nest.violation<- sum(is.na(data [ data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] , which(colnames(data) %in% all.vars(formula)[-1])]))
+  nest.violation<- sum(!complete.cases(data [ data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] , which(colnames(data) %in% all.vars(formula)[-1]) ]))
 
   if(nest.violation > 0){
     warning(paste("Sample design not nested: for",nest.violation,"terrestrial plots at least one auxiliary parameter is missing"))

@@ -258,14 +258,14 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
   # --> each s1-point muss have the complete set of s0-auxvars (s0-info) available
 
   # test 1: s2 c s1 ?
-  s2_in_s1.nest.violation<- sum(is.na(data [ data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] , which(colnames(data) %in% all.vars(formula.s1)[-1])]))
+  s2_in_s1.nest.violation<- sum(!complete.cases(data [ data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] , which(colnames(data) %in% all.vars(formula.s1)[-1])]))
+
 
   # test 1: s2 c s0 ?
-  s2_in_s0.nest.violation<- sum(is.na(data [ data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] , which(colnames(data) %in% all.vars(formula.s0)[-1])]))
+  s2_in_s0.nest.violation<- sum(!complete.cases(data [ data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] , which(colnames(data) %in% all.vars(formula.s0)[-1])]))
 
   # test 1: s1 c s0 ?
-  s1_in_s0.nest.violation<- sum(is.na(data [ data[[phase_id[["phase.col"]]]] == phase_id[["s1.id"]] , which(colnames(data) %in% all.vars(formula.s0)[-1])]))
-
+  s1_in_s0.nest.violation<- sum(!complete.cases(data [ data[[phase_id[["phase.col"]]]] == phase_id[["s1.id"]] , which(colnames(data) %in% all.vars(formula.s0)[-1])]))
 
   if(s2_in_s1.nest.violation > 0){ # read: "s2 with no s1-info"
     warning(paste("Sample design not nested: for",s2_in_s1.nest.violation,"terrestrial plots at least one auxiliary parameter of the second phase (s1) is missing"))
