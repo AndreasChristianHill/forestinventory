@@ -257,8 +257,17 @@ twophase <- function(formula, data, phase_id, cluster=NA,
                   nest.violation," terrestrial plots affected by deletion)",sep = ""))
   }
 
-  # check if every terrestrial plot (s2) has a response-value assigned:
-  deleted.s2 <- data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] & !complete.cases(data[,all.vars(formula)[1]])
+  # check if there is an s2 point without response value, but with all auxiliary info:
+  change.s2.to.s1<- data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] & !complete.cases(data[,all.vars(formula)[1]]) & complete.cases(data[,all.vars(formula)[-1]])
+  sum.NA_change.s2.to.s1<- sum(change.s2.to.s1)
+
+  if(sum.NA_change.s2.to.s1 > 0) {
+    data[[phase_id[["phase.col"]]]] [change.s2.to.s1]<- 1
+    message(paste("Changed the phase_id for ",sum.NA_change.s2.to.s1," rows to the first phase (s1) due to missing value for the response variable in the second phase (s2)",sep = ""))
+  }
+
+  # check if every remaining terrestrial plot (s2) has a response-value assigned:
+  deleted.s2 <- data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] & !complete.cases(data[,all.vars(formula)[1]]) & !complete.cases(data[,all.vars(formula)[-1]])
   sum.deleted.s2<- sum(deleted.s2)
 
   # change missing reponse information for s2-grid to s1-grid and produce message:
@@ -266,6 +275,7 @@ twophase <- function(formula, data, phase_id, cluster=NA,
     data<- data[- which(deleted.s2),]
     message(paste("Additional ", sum.deleted.s2," rows deleted due to missing value for the response variable", sep = ""))
   }
+
 
   # -------------------------------------------------------------------------- #
   # -------------------------------------------------------------------------- #

@@ -1,11 +1,11 @@
 #' threephase
 #'
 #' \code{threephase} is used to calculate estimations based on triple sampling under the
-#' \emph{model-assisted Monte Carlo approach}. A \emph{first phase} of auxiliary information
+#' \emph{model-assisted Monte Carlo approach}. A \emph{zero phase} of auxiliary information
 #' (e.g. taken from remote sensing data) is used to generate model predictions based on multiple linear
-#' regression using the method of ordinary least squares. A subsample of the first phase comprises
-#' a \emph{second phase} which contains further auxiliary information that produces another set of model predictions.
-#' A further subsample produces a \emph{third final phase} based on terrestrial observations
+#' regression using the method of ordinary least squares. A subsample of the zero phase comprises
+#' further auxiliary information that produces another set of model predictions.
+#' A further subsample produces a \emph{second phase} based on terrestrial observations
 #' (i.e. the \emph{local densities} of the ground truth) and is used to correct for bias in the design-based sense.
 #' The estimation method is available for \emph{simple} and \emph{cluster sampling} and includes
 #' the special case where the first phase is based on an \emph{exhaustive} sample (i.e. a census).
@@ -14,11 +14,11 @@
 #' equivalent version derived under Mandallaz's extended model approach.
 #'
 #' @param formula.s0 an object of class "\code{\link[stats]{formula}}" as would be used in the function \code{\link[stats]{lm}}
-#'                   that contains a reduced set of auxiliary variables available for all first phase plots
+#'                   that contains a reduced set of auxiliary variables available for all zero phase plots
 #'
 #' @param formula.s1 an object of class "\code{\link[stats]{formula}}" as would be used in the function \code{\link[stats]{lm}}
 #'                   that contains the predictors from \code{formula.s0} as well as further ancilliary predictors available
-#'                   for all second phase plots (i.e. \code{formula.s0} is \strong{nested} in \code{formula.s1})
+#'                   for all first phase plots (i.e. \code{formula.s0} is \strong{nested} in \code{formula.s1})
 #'
 #' @param data  a data frame containing all variables contained in \code{formula} and a column indexing
 #'                  phase membership.  Additional columns designating small-area membership, cluster ID and
@@ -98,7 +98,7 @@
 #'          is equal to the percentage of forested area (e.g. as defined by a forest mask) in the interpretation area.
 #'
 #'          Exhaustive estimation refers to when the true means of certain auxiliary variables are known
-#'          and an exhaustive first phase (i.e. a census).  For global estimation, the vector must be input
+#'          at an exhaustive zero phase (i.e. a census).  For global estimation, the vector must be input
 #'          in the same order that \code{lm} processes a \code{formula} object including the intercept term whose
 #'          true mean will always be one.  For small area estimation, \code{exhaustive} is a \code{data.frame} containing column names for every variable appearing in
 #'          the parameter \code{formula} including the variable "Intercept".  The observations of the data.frame
@@ -119,12 +119,12 @@
 #'                                               fitting the model from the current inventory
 #'                    \item \code{g_variance:} the internal (g-weight) variance that accounts for
 #'                                               fitting the model from the current inventory
-#'                    \item \code{n0} the first phase sample size of plots
-#'                    \item \code{n1} the second phase sample size of plots
-#'                    \item \code{n2} the third phase (i.e. terrestrial) sample size of plots
-#'                    \item \code{n0G} the first phase sample size in the small area
-#'                    \item \code{n1G} the second phase sample size in the small area
-#'                    \item \code{n2G} the third phase (i.e. terrestrial) sample size in the small area
+#'                    \item \code{n0} the zero phase sample size of plots
+#'                    \item \code{n1} the first phase sample size of plots
+#'                    \item \code{n2} the second phase (i.e. terrestrial) sample size of plots
+#'                    \item \code{n0G} the zero phase sample size in the small area
+#'                    \item \code{n1G} the first phase sample size in the small area
+#'                    \item \code{n2G} the second phase (i.e. terrestrial) sample size in the small area
 #'                    \item \code{r.squared_reduced} the R-squared of the linear model based on \code{formula.s0} (i.e. the reduced model)
 #'                    \item \code{r.squared_full} the R-squared of the linear model based on \code{formula.s1} (i.e. the full model)
 #'                    }}
@@ -137,10 +137,10 @@
 #'                    }}
 #'  \item{cov_alpha_s2}{the design-based covariance matrix of the reduced model coefficients}
 #'  \item{cov_beta_s2}{the design-based covariance matrix of the full model coefficients}
-#'  \item{Z_bar_1_s0}{the estimated auxiliary means of \code{formula.s0} based on the first phase.
-#'                    If the first phase is exhaustive, these are the true auxiliary means specified in the input-argument \code{exhaustive}.}
-#'  \item{Z1_bar_s1}{the estimated auxiliary means of \code{formula.s0} based on the second phase}
-#'  \item{Z_bar_s1}{the estimated auxiliary means of \code{formula.s1} based on the second phase}
+#'  \item{Z_bar_1_s0}{the estimated auxiliary means of \code{formula.s0} based on the zero phase.
+#'                    If the zero phase is exhaustive, these are the true auxiliary means specified in the input-argument \code{exhaustive}.}
+#'  \item{Z1_bar_s1}{the estimated auxiliary means of \code{formula.s0} based on the first phase}
+#'  \item{Z_bar_s1}{the estimated auxiliary means of \code{formula.s1} based on the first phase}
 #'  \item{cov_Z_bar_1_s0}{the covariance matrix for \code{Z_bar_1_s0}}
 #'  \item{resid_reduced}{the reduced model residuals at either the plot level or cluster level depending on the call}
 #'  \item{resid_full}{the full model residuals at either the plot level or cluster level depending on the call}
@@ -268,15 +268,15 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
   s1_in_s0.nest.violation<- sum(!complete.cases(data [ data[[phase_id[["phase.col"]]]] == phase_id[["s1.id"]] , which(colnames(data) %in% all.vars(formula.s0)[-1])]))
 
   if(s2_in_s1.nest.violation > 0){ # read: "s2 with no s1-info"
-    warning(paste("Sample design not nested: for",s2_in_s1.nest.violation,"terrestrial plots at least one auxiliary parameter of the second phase (s1) is missing"))
+    warning(paste("Sample design not nested: for",s2_in_s1.nest.violation,"terrestrial plots at least one auxiliary parameter of the first phase (s1) is missing"))
   }
 
   if(s2_in_s0.nest.violation > 0){
-    warning(paste("Sample design not nested: for",s2_in_s0.nest.violation,"terrestrial plots at least one auxiliary parameter of the first phase (s0) is missing"))
+    warning(paste("Sample design not nested: for",s2_in_s0.nest.violation,"terrestrial plots at least one auxiliary parameter of the zero phase (s0) is missing"))
   }
 
   if(s1_in_s0.nest.violation > 0){
-    warning(paste("Sample design not nested: for",s1_in_s0.nest.violation,"second phase (s1) plots at least one auxiliary parameter of the first phase (s0) is missing"))
+    warning(paste("Sample design not nested: for",s1_in_s0.nest.violation,"second phase (s1) plots at least one auxiliary parameter of the zero phase (s0) is missing"))
   }
 
 
@@ -291,7 +291,7 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
   # delete missing rows in s0 of entire dataset and produce message:
   if(sum.NA_omitted.s0 != 0) {
     data<- data[- which(deleted.s0),]
-    m0<- message(paste(sum.NA_omitted.s0," rows deleted due to missingness in the set of auxiliary parameters for the first phase (s0) (",
+    m0<- message(paste(sum.NA_omitted.s0," rows deleted due to missingness in the set of auxiliary parameters for the zero phase (s0) (",
                        s2_in_s0.nest.violation," terrestrial plots affected by deletion)",sep = ""))
   }
 
@@ -304,8 +304,8 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
   if(sum.NA_change.s1.to.s0 > 0) {
     data[[phase_id[["phase.col"]]]] [change.s1.to.s0]<- 0
     data[change.s1.to.s0, which(colnames(data) %in% all.vars(formula.s1)[1])]<- NA
-    m1<- message(paste("Changed the phase_id for ",sum.NA_change.s1.to.s0," rows to the first phase (s0) due to missingness in the set of auxiliary parameters
-                       for the second phase (s1) (",s2_in_s1.nest.violation," terrestrial information no longer usable by this change)",sep = ""))
+    m1<- message(paste("Changed the phase_id for ",sum.NA_change.s1.to.s0," rows to the zero phase (s0) due to missingness in the set of auxiliary parameters
+                       for the first phase (s1) (",s2_in_s1.nest.violation," terrestrial information no longer usable by this change)",sep = ""))
   }
 
 
