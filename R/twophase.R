@@ -246,34 +246,34 @@ twophase <- function(formula, data, phase_id, cluster=NA,
   # -------------------------------------------------------------------------- #
   # NA-treatment:
 
-  # rows to be deleted due to missingness in s1 (i.e. set of auxiliary informations):
+  # rows to be deleted due to missingness of expl. variables in s1 (i.e. set of auxiliary informations):
   deleted.s1<- !complete.cases(data [, which(colnames(data) %in% all.vars(formula)[-1])]) # logical vector returning rows with missing entries
   sum.NA_omitted<- sum(deleted.s1)
 
   # delete missing rows in entire dataset and produce message:
   if(sum.NA_omitted != 0) {
     data<- data[- which(deleted.s1),]
-    message(paste(sum.NA_omitted," rows deleted due to missingness in the set of auxiliary parameters (",
+    warning(paste(sum.NA_omitted," rows deleted due to missingness in the set of auxiliary parameters (",
                   nest.violation," terrestrial plots affected by deletion)",sep = ""))
   }
 
   # check if there is an s2 point without response value, but with all auxiliary info:
   change.s2.to.s1<- data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] & !complete.cases(data[,all.vars(formula)[1]]) & complete.cases(data[,all.vars(formula)[-1]])
   sum.NA_change.s2.to.s1<- sum(change.s2.to.s1)
-
+  # ... and in that case change missing reponse information for s2-grid to s1-grid:
   if(sum.NA_change.s2.to.s1 > 0) {
-    data[[phase_id[["phase.col"]]]] [change.s2.to.s1]<- 1
-    message(paste("Changed the phase_id for ",sum.NA_change.s2.to.s1," rows to the first phase (s1) due to missing value for the response variable in the second phase (s2)",sep = ""))
+   s1.id<- unique(data [[ phase_id[["phase.col"]] ]])[!(unique(data [[ phase_id[["phase.col"]] ]]) %in% phase_id[["terrgrid.id"]])]
+   data[[phase_id[["phase.col"]]]] [change.s2.to.s1]<- s1.id
+   warning(paste("Changed the phase_id for ",sum.NA_change.s2.to.s1," rows to the first phase (s1) due to missing value for the response variable in the second phase (s2)",sep = ""))
   }
 
   # check if every remaining terrestrial plot (s2) has a response-value assigned:
   deleted.s2 <- data[[phase_id[["phase.col"]]]] == phase_id[["terrgrid.id"]] & !complete.cases(data[,all.vars(formula)[1]]) & !complete.cases(data[,all.vars(formula)[-1]])
   sum.deleted.s2<- sum(deleted.s2)
-
-  # change missing reponse information for s2-grid to s1-grid and produce message:
+  # ... and if not, delete these rows from the dataset:
   if(sum.deleted.s2 != 0) {
     data<- data[- which(deleted.s2),]
-    message(paste("Additional ", sum.deleted.s2," rows deleted due to missing value for the response variable", sep = ""))
+    warning(paste(sum.deleted.s2," rows deleted due to missing value for the response variable AND at least one of the auxiliary variables", sep = ""))
   }
 
 
