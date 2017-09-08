@@ -61,12 +61,6 @@ op <- onephase(formula = tvol~1,
 summary(op)
 ```
 
-We compute the estimation error in % as the *Standard Deviation / Point Estimate*:
-```{r}
-ee.o<- 100*(sqrt(op$estimation$variance) / op$estimation$estimate)
-names(ee.o)<- op$estimation$area
-ee.o
-```
 
 We now try to increase the precision of our estimates by applying a *twophase 
 estimation method*, where we use the large sample of LiDAR-metrics and 
@@ -81,33 +75,39 @@ sae.2p.uv<- twophase(formula = tvol ~ mean + stddev + max + q75, data = grisons,
 summary(sae.2p.uv)
 ```
 
-We again compute the estimation error in % and see how the efficiency has been increased from
-the onephase to the twophase approach:
-```{r}
-ee.uv<- 100*(sqrt(sae.2p.uv$estimation$g_variance) / sae.2p.uv$estimation$estimate)
-names(ee.uv)<- op$estimation$area
-ee.uv
+We now want to compare the results and performances of the onephase and twophase method. For such issues, the package provides
+the `estTable()` function that concatenates the results from the different methods in one `list`:
 
-efficiency<- 100* ((ee.o - ee.uv) / ee.o)
-names(efficiency)<- op$estimation$area
-efficiency
+```{r}
+sae.table<- estTable(est.list = list(op, sae.2p.uv), sae = TRUE)
+
+data.frame(sae.table[c(1:6,9)])
 ```
 
-In our short example, we were able to reduce the estimation error by 9 % up to 37 %
+We can already see that the estimation errors of the twophase estimation are up to 5% smaller than the onephase errors.
+
+The function `mphase.gain()` can now be used to further compare the performance of the methods:
+
+```{r}
+mphase.gain(sae.table)
+```
+
+The column `gain` tells us that the twophase estimation procedure here leads to a 67.9 % reduction in variance compared to the one-
+phase procedure". The column `rel.eff` speciﬁes the relative efﬁciency that can be interpreted as the relative sample size of the one-phase estimator needed
+to achieve the variance of the multi-phase (here twophase) estimator. For small area "B" we can thus see that we would
+have to increase the terrestrial sample size by factor 3 in the one-phase approach in order to get the same
+estimation precision as the twophase extended psynth estimator. 
+
+
+So in our short example, we were able to considerably improve the estimation precision
 when combining the terrestrial data with the remote sensing data. The package `forestinventory`
 offers further estimators that can be applied to a wide range of multiphase inventory scenarios.
 
 
 # Installation
 
-The package will soon be available from CRAN:
+The package can be installed from CRAN:
 ```{r, eval=F}
 install.packages("forestinventory")
 ```
-
-
-# Coming soon ...
-A vignette will be released as soon as possible, giving detailed information about the implemented
-estimation methods and estimators and how to apply them to inventory scenarios in practice.
-
 

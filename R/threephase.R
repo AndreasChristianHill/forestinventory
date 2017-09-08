@@ -448,6 +448,12 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
 
     # --- error checking -- :
     check.clusterInput(data, cluster)
+
+    # --- rename cluster colname to "cluster" --- #
+    colnames(data)[which(colnames(data) %in% cluster)]<- "cluster"
+    cluster.orig<- cluster
+    cluster<- "cluster"
+
     if(!all(!is.na(data[["cluster"]]))){print(paste("WARNING: NAs removed from ",cluster))} #warning for NAs in cluster id
     data <- data[!is.na(data[["cluster"]]),] #strip NA clusterIDS
 
@@ -529,7 +535,13 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
     }
 
 
-  } # end of non-cluster function calls
+    # ---------------------------------------------------------------------#
+
+    # rename cluster colname to original #
+    colnames(result$input$data)[which(colnames(result$input$data) %in% "cluster")]<- cluster.orig
+
+
+  } # end of cluster function calls
 
 
   # -------------------------------------------------------------------------- #
@@ -538,6 +550,7 @@ threephase <- function(formula.s0, formula.s1, data, phase_id, cluster=NA,
   # add function call to returned-list:
 
   result[["input"]]<- c(result[["input"]], call=call)
+
 
   result
 
