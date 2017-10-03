@@ -79,7 +79,7 @@
 #'          defined within a \code{character} vector using \code{c()}. Using \code{small_area(..., unbiased=FALSE)}
 #'          calculates design-based estimates with the synthetic estimator and may be design-biased if
 #'          the model is biased in that small area.  The default, \code{small_area(..., unbiased=TRUE)}, allows for a residual
-#'          correction by one of two asympototically equivalent methods to create design-unbiased estimates:
+#'          correction by one of two asymptotically equivalent methods to create design-unbiased estimates:
 #'          \itemize{
 #'              \item Mandallaz's extended model approach calculates the residual correction by extending the
 #'                    model formula with an indicator variable in the small area.  It is the default method
