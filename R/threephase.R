@@ -157,7 +157,7 @@
 #' with applications to small-area estimation.} Canadian Journal of Forest Research, 43(11), 1023-1031.
 #' @references Mandallaz, D. (2014). \emph{A three-phase sampling extension of the generalized regression estimator with partially exhaustive information.} Can. J. For. Res. 44: 383-388
 #' @references Massey, A. and Mandallaz, D. and Lanz, A. (2014). \emph{Integrating remote sensing and past inventory data under the new annual design of the Swiss National Forest Inventory using three-phase design-based regression estimation.} Can. J. For. Res. 44(10): 1177-1186
-#' @references Mandallaz, D. (2013). \emph{Regression estimators in forest inventories with three-phase sampling and two multivariate components of auxiliary information.} ETH Zurich, Department of Environmental Systems Science,Tech. rep. Available from \url{http://e-collection.library.ethz.ch}.
+#' @references Mandallaz, D. (2013). \emph{Regression estimators in forest inventories with three-phase sampling and two multivariate components of auxiliary information.} ETH Zurich, Department of Environmental Systems Science,Tech. rep. Available from \url{https://doi.org/10.3929/ethz-a-009990020}.
 #'
 #' @example examples/example_threephase_estimations_long.R
 #'
