@@ -11,7 +11,7 @@ estTable(est.list, sae = FALSE, add.ci = TRUE, vartypes = c("variance",
 \item{est.list}{a \code{\link[base]{list}} object containing at least one multiphase estimation object created by
 the \code{\link{twophase}} or \code{\link{threephase}} function and the respective \code{\link{onephase}} estimation object.}
 
-\item{sae}{an object of type \code{\link[base]{logical}}. Has to be set to \code{TRUE} if results of small area estimations are passed to \code{Esttable}.
+\item{sae}{an object of type \code{\link[base]{logical}}. Has to be set to \code{TRUE} if results of small area estimations are passed to \code{estTable}.
 Defaults to \code{FALSE}.}
 
 \item{add.ci}{\code{logical}: Should confidence intervals be added? Defaults to \code{TRUE}.}
@@ -23,7 +23,7 @@ contains \code{"variance"}, \code{"ext_variance"} and \code{"g_variance"}.}
 \code{estTable} returns a \code{list} of the following components:
 
  \itemize{
-    \item \code{area:} in case of small area estiamtions: the name of the small area
+    \item \code{area:} in case of small area estimations: the name of the small area
     \item \code{estimate:} the point estimates
     \item \code{vartype:} the type of variance
     \item \code{variance:} the variance values
@@ -35,12 +35,10 @@ contains \code{"variance"}, \code{"ext_variance"} and \code{"g_variance"}.}
     \item \code{n2:} terrestrial sample size in entire inventory area
     \item \code{n1:} first phase sample size in entire inventory area
     \item \code{n0:} in case of \code{threephase} estimations: zero phase sample size in entire inventory area
-    \item \code{n1:} first phase sample size in entire inventory area
-    \item \code{n0:} in case of \code{threephase} estimations: zero phase sample size in entire inventory area
     \item \code{n2G:} terrestrial sample size in small area
     \item \code{n1G:} first phase sample size in small area
     \item \code{n0G:} in case of \code{threephase} estimations: zero phase sample size in small area
-    \item \code{r.squared: coefficient of determination of regression model}
+    \item \code{r.squared:} coefficient of determination of regression model
     \item \code{r.squared_reduced:} in case of \code{threephase} estimations: coefficient of determination of reduced regression model
     \item \code{r.squared_full:} in case of \code{threephase} estimations: coefficient of determination of full regression model
     \item \code{ci_lower:} if \code{add.ci=TRUE}: lower confidence limit

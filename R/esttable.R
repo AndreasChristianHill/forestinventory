@@ -149,7 +149,7 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE,
       cdat$error<- cdat$std / cdat$estimate
       cdat$error<- round(100*cdat$error, digits = 2)
 
-      # Reihenfolge (sieht schöner aus):
+      # Reihenfolge:
       my.order<- c("area", "estimate", "vartype", "variance", "std", "error", "domain", "method", "estimator",
                    "n2", "n2G", "n1", "n1G", "n0", "n0G", "r.squared", "r.squared_reduced", "r.squared_full")
 
@@ -242,7 +242,7 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE,
       cdat$std<- sqrt(cdat$variance) / cdat$estimate
       cdat$error<- round(100*cdat$std, digits = 2)
 
-      # Reihenfolge (sieht schöner aus):
+      # Reihenfolge:
       my.order<- c("area", "estimate", "vartype", "variance", "std", "error", "domain", "method", "estimator",
                    "n2", "n2G", "n1", "n1G", "n0", "n0G", "r.squared", "r.squared_reduced", "r.squared_full")
 

@@ -13,7 +13,6 @@ output:
 * Corrections: improved runtime of psmall-estimator, removed bug for including interaction terms in regression models, 
 fixed bug in confidence interval calculation for pseudosynthetic estimator under cluster sampling
               
+03-10-17  forestinventory Version 0.3.0 released to CRAN!
 
-
-
-
+* New features: analysis functions and visualization functions added
