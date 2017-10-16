@@ -27,4 +27,6 @@ Imports: plyr (>= 1.8.3),
     utils,
     tidyr,
     ggplot2
+Suggests: R.rsp
+VignetteBuilder: R.rsp
 RoxygenNote: 6.0.1
