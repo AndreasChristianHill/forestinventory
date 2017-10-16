@@ -1,12 +1,13 @@
 ---
 title: "cran-comments"
 author: "Andreas Hill, Alexander Massey"
-date: "03 October 2017"
+date: "16 October 2017"
 ---
 
 
-## Second minor release
-This is a submission of a new (third) minor release of our package. 
+## Patch for third minor release
+This is a submission of a patch for the current (third) minor release of our package.
+We added a vignette that was also just submitted to the Journal of Statistical Software
 
 ## Test environments
 * local Windows 7 OS, R 3.4.2
