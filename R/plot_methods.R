@@ -20,6 +20,8 @@
 
 plot.esttable<- function(x, yvar="error", ncol=5, yscale.free=TRUE,...){
 
+  # check input:
+  if(!class(x)[2] == "esttable"){stop("'plot.esttable()' expects an 'esttable' object created by 'estTable()'")}
 
   getclass<- class(x)
 
@@ -59,7 +61,7 @@ plot.esttable<- function(x, yvar="error", ncol=5, yscale.free=TRUE,...){
 
 
     # ************************* #
-    if(getclass[3]=="global"){
+    if(getclass[1]=="global"){
 
       p<-  ggplot(data = dat, aes_q(x=quote(method), y=quote(error), fill=quote(methest))) +
         geom_bar(colour="black", stat="identity", position=position_dodge()) +
@@ -69,7 +71,7 @@ plot.esttable<- function(x, yvar="error", ncol=5, yscale.free=TRUE,...){
 
 
     # ************************* #
-    if(getclass[3]=="smallarea"){
+    if(getclass[1]=="smallarea"){
 
       if(yscale.free){scaleset<- "free_y"}
       if(!yscale.free){scaleset<- "fixed"}
@@ -89,7 +91,7 @@ plot.esttable<- function(x, yvar="error", ncol=5, yscale.free=TRUE,...){
   if(yvar=="estimate"){
 
     # ************************* #
-    if(getclass[3]=="global"){
+    if(getclass[1]=="global"){
 
       p<- ggplot(data=dat, aes_q(x=quote(method), y=quote(estimate), fill=quote(methest))) +
         geom_bar(colour="black", stat="identity", position=position_dodge()) +
@@ -100,7 +102,7 @@ plot.esttable<- function(x, yvar="error", ncol=5, yscale.free=TRUE,...){
 
 
     # ************************* #
-    if(getclass[3]=="smallarea"){
+    if(getclass[1]=="smallarea"){
 
       if(yscale.free){scaleset<- "free_y"}
       if(!yscale.free){scaleset<- "fixed"}
