@@ -113,12 +113,12 @@ mphase.gain<- function(esttable.obj, pref.vartype = "g_variance", exclude.synth 
   }
   # -------- #
 
-  if(getclass[3]=="global"){
+  if(getclass[1]=="global"){
     # apply closure:
       return(prec.gain(esttable.obj))
   }
 
-  if(getclass[3]=="smallarea"){
+  if(getclass[1]=="smallarea"){
     # apply closure:
       return(ddply(esttable.obj,"area", prec.gain))
   }

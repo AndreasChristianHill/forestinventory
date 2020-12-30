@@ -188,8 +188,7 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE,
     # restrict to certain variance-types:
     cdat<- cdat[cdat$vartype %in% vartypes,]
 
-    class(cdat)<- c("list", "esttable", "smallarea")
-
+    class(cdat)<- c("smallarea", "esttable", "list")
     return(cdat)
 
   } # end of "long"-formatting sae-objects
@@ -271,7 +270,7 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE,
     # restrict to certain variance-types:
     cdat<- cdat[cdat$vartype %in% vartypes,]
 
-    class(cdat)<- c("list", "esttable", "global")
+    class(cdat)<- c("global", "esttable", "list")
 
     return(cdat)
 
