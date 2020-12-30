@@ -165,7 +165,7 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE,
     if(add.ci){
       cdat.ci<- gather_(data = dn, key_col = "vartype", value_col="value",
                      gather_cols=c("ci_lower_op", "ci_upper_op", "ci_lower_ext", "ci_upper_ext", "ci_lower_g", "ci_upper_g"))
-      cdat.ci<- extract_(data=cdat.ci, col= "vartype", into=c("question","vartype"), regex="(c._.....)\\_(.*)")
+      cdat.ci<- extract(data=cdat.ci, col= "vartype", into=c("question","vartype"), regex="(c._.....)\\_(.*)")
       cdat.ci<- spread_(data = cdat.ci, key_col="question", value_col = "value")
 
       cdat.ci$vartype[cdat.ci$vartype=="op"]<- "variance"
@@ -249,7 +249,7 @@ estTable<- function(est.list, sae=FALSE, add.ci=TRUE,
     if(add.ci){
       cdat.ci<- gather_(data = dn, key_col = "vartype", value_col="value",
                      gather_cols=c("ci_lower_op", "ci_upper_op", "ci_lower_ext", "ci_upper_ext", "ci_lower_g", "ci_upper_g"))
-      cdat.ci<- extract_(data=cdat.ci, col= "vartype", into=c("question","vartype"), regex="(c._.....)\\_(.*)")
+      cdat.ci<- extract(data=cdat.ci, col= "vartype", into=c("question","vartype"), regex="(c._.....)\\_(.*)")
       cdat.ci<- spread_(data = cdat.ci, key_col="question", value_col = "value")
 
       cdat.ci$vartype[cdat.ci$vartype=="op"]<- "variance"
