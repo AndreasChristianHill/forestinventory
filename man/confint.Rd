@@ -7,14 +7,11 @@
 \alias{confint.threephase}
 \title{Calculates Confidence Intervals for Global and Small-Area Estimations}
 \usage{
-\method{confint}{onephase}(object, parm, level = 0.95,
-  adjust.method = "none", ...)
+\method{confint}{onephase}(object, parm, level = 0.95, adjust.method = "none", ...)
 
-\method{confint}{twophase}(object, parm, level = 0.95,
-  adjust.method = "none", ...)
+\method{confint}{twophase}(object, parm, level = 0.95, adjust.method = "none", ...)
 
-\method{confint}{threephase}(object, parm, level = 0.95,
-  adjust.method = "none", ...)
+\method{confint}{threephase}(object, parm, level = 0.95, adjust.method = "none", ...)
 }
 \arguments{
 \item{object}{object of class \code{onephase}, \code{twophase} or \code{threephase},

@@ -4,8 +4,12 @@
 \alias{estTable}
 \title{estTable}
 \usage{
-estTable(est.list, sae = FALSE, add.ci = TRUE, vartypes = c("variance",
-  "ext_variance", "g_variance"))
+estTable(
+  est.list,
+  sae = FALSE,
+  add.ci = TRUE,
+  vartypes = c("variance", "ext_variance", "g_variance")
+)
 }
 \arguments{
 \item{est.list}{a \code{\link[base]{list}} object containing at least one multiphase estimation object created by

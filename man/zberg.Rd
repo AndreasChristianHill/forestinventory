@@ -4,7 +4,9 @@
 \name{zberg}
 \alias{zberg}
 \title{Data from a multiphase forest inventory at the zurichberg (zurich), switzerland}
-\format{data frame with 1203 rows and 12 columns}
+\format{
+data frame with 1203 rows and 12 columns
+}
 \source{
 Data provided by D.Mandallaz
 }

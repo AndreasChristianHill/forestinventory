@@ -4,8 +4,7 @@
 \alias{plot.esttable}
 \title{Plotting Estimation Results}
 \usage{
-\method{plot}{esttable}(x, yvar = "error", ncol = 5, yscale.free = TRUE,
-  ...)
+\method{plot}{esttable}(x, yvar = "error", ncol = 5, yscale.free = TRUE, ...)
 }
 \arguments{
 \item{x}{object of class \code{"list" "esttable"} created by the \code{\link{estTable}} function.}

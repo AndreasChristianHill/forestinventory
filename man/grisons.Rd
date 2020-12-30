@@ -4,7 +4,9 @@
 \name{grisons}
 \alias{grisons}
 \title{Data from a multiphase forest inventory in the canton of Grisons, Switzerland}
-\format{data frame with 306 rows and 14 columns}
+\format{
+data frame with 306 rows and 14 columns
+}
 \source{
 The terrestrial data are kindly provided by the forest service of the canton grisons.
 

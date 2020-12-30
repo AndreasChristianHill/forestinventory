@@ -4,8 +4,13 @@
 \alias{onephase}
 \title{onephase}
 \usage{
-onephase(formula, data, phase_id = list(phase.col = NA, terrgrid.id = NA),
-  cluster = NA, area = list(sa.col = NA, areas = NA))
+onephase(
+  formula,
+  data,
+  phase_id = list(phase.col = NA, terrgrid.id = NA),
+  cluster = NA,
+  area = list(sa.col = NA, areas = NA)
+)
 }
 \arguments{
 \item{formula}{an object of class "\code{\link[stats]{formula}}" that

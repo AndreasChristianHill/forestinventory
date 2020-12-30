@@ -3,7 +3,6 @@
 \docType{package}
 \name{forestinventory}
 \alias{forestinventory}
-\alias{forestinventory-package}
 \title{forestinventory: A package for computing design-based estimates for multiphase forest inventories}
 \description{
 The package provides \strong{\emph{global}}- and \strong{\emph{smallarea estimators}} for

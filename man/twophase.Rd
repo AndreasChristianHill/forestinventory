@@ -4,9 +4,17 @@
 \alias{twophase}
 \title{twophase}
 \usage{
-twophase(formula, data, phase_id, cluster = NA, small_area = list(sa.col =
-  NA, areas = NA, unbiased = TRUE), boundary_weights = NA, exhaustive = NA,
-  progressbar = FALSE, psmall = FALSE)
+twophase(
+  formula,
+  data,
+  phase_id,
+  cluster = NA,
+  small_area = list(sa.col = NA, areas = NA, unbiased = TRUE),
+  boundary_weights = NA,
+  exhaustive = NA,
+  progressbar = FALSE,
+  psmall = FALSE
+)
 }
 \arguments{
 \item{formula}{an object of class "\code{\link[stats]{formula}}" as would be used in the function \code{\link[stats]{lm}}}
