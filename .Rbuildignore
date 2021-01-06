@@ -6,3 +6,4 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^NEWS\.md$
+^winbuilder_checks\.R$

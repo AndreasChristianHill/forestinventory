@@ -1,18 +1,20 @@
 ---
 title: "cran-comments"
 author: "Andreas Hill, Alexander Massey"
-date: "16 October 2017"
+date: "04 January 2021"
 ---
 
 
-## Patch for third minor release
-This is a submission of a patch for the current (third) minor release of our package.
-We added a vignette that was also just submitted to the Journal of Statistical Software
+## First major release
+This is a submission of the first major release of our packag after having undergone an intense review process by the
+Journal of Statistical Software. 
+The DOI in the CITATION is for the new JSS publication that will be registered after publication on CRAN.
+We included few code-refinements as result of the intense JSS-review of the code.
 
 ## Test environments
-* local Windows 7 OS, R 3.4.2
-* local Kubuntu 16.04, Kernel Version 4.4.0-78-generic, R 3.4.2
-* win-builder (devel and release)
+* local Windows 10 OS, R 4.0.3
+* win-builder (devel, release and oldrelease)
+* Ubuntu 20.04, R 4.0.3
 
 ## R CMD check results
 There were no ERRORS, WARNINGS, NOTES

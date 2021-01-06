@@ -353,6 +353,8 @@ summary(threephase(formula.clust.s0,
 
 }
 \references{
+Hill, A., Massey, A. F. (2021). \emph{The R Package forestinventory: Design-Based Global and Small Area Estimations for Multiphase Forest Inventories.} Journal of Statistical Software, 97(4), 1-40.
+
 Mandallaz, D., Breschan, J., & Hill, A. (2013). \emph{New regression estimators in forest inventories
 with two-phase sampling and partially exhaustive information: a design-based monte carlo approach
 with applications to small-area estimation.} Canadian Journal of Forest Research, 43(11), 1023-1031.
@@ -361,5 +363,5 @@ Mandallaz, D. (2014). \emph{A three-phase sampling extension of the generalized 
 
 Massey, A. and Mandallaz, D. and Lanz, A. (2014). \emph{Integrating remote sensing and past inventory data under the new annual design of the Swiss National Forest Inventory using three-phase design-based regression estimation.} Can. J. For. Res. 44(10): 1177-1186
 
-Mandallaz, D. (2013). \emph{Regression estimators in forest inventories with three-phase sampling and two multivariate components of auxiliary information.} ETH Zurich, Department of Environmental Systems Science,Tech. rep. Available from \url{https://doi.org/10.3929/ethz-a-009990020}.
+Mandallaz, D. (2013). \emph{Regression estimators in forest inventories with three-phase sampling and two multivariate components of auxiliary information.} ETH Zurich, Department of Environmental Systems Science,Tech. rep. Available from \doi{10.3929/ethz-a-009990020}.
 }

@@ -326,6 +326,8 @@ summary(twophase(formula = basal ~ stade + couver + melange, data = zberg,
 
 }
 \references{
+Hill, A., Massey, A. F. (2021). \emph{The R Package forestinventory: Design-Based Global and Small Area Estimations for Multiphase Forest Inventories.} Journal of Statistical Software, 97(4), 1-40.
+
 Mandallaz, D. (2007). \emph{Sampling techniques for forest inventories.} Chapter 4. CRC Press.
 
 Mandallaz, D. (2013). \emph{Design-based properties of some small-area estimators in forest inventory with two-phase sampling.} Can. J. For. Res. 43: 441-449

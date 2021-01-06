@@ -40,6 +40,9 @@ especially in the framework of three-phase smallarea estimators.
 \section{Selected references}{
 
 
+Hill, A., Massey, A. F. (2021). \emph{The R Package forestinventory: Design-Based Global and Small
+Area Estimations for Multiphase Forest Inventories.} Journal of Statistical Software, 97(4), 1-40.
+
 Massey, A. F. (2015). \emph{Multiphase estimation procedures for forest inventories under
 the design-based Monte Carlo approach} (Doctoral dissertation, Diss., ETH Zurich, Nr. 23025).
 

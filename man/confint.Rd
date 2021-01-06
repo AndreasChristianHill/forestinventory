@@ -117,6 +117,9 @@ confint(sae.est)
 confint(sae.est, adjust.method = "bonferroni")
 }
 \references{
+Hill, A., Massey, A. F. (2021). \emph{The R Package forestinventory: Design-Based Global and Small
+Area Estimations for Multiphase Forest Inventories.} Journal of Statistical Software, 97(4), 1-40.
+
 Mandallaz, D. (2013). \emph{Design-based properties of some small-area estimators in forest inventory
 with two-phase sampling.} Canadian Journal of Forest Research, 43(5), 441-449.
 
