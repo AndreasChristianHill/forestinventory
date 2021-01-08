@@ -2,7 +2,7 @@ Package: forestinventory
 Type: Package
 Title: Design-Based Global and Small-Area Estimations for Multiphase Forest Inventories
 Version: 1.0.0
-Date: 2021-01-04
+Date: 2021-01-08
 Authors@R: c(person(given = c("Andreas"), family = "Hill",
                      email = "andreas.hill@wald-rlp.de", role = c("aut","cre")),
               person(given = c("Alexander"), family = "Massey",

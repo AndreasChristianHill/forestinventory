@@ -1,14 +1,14 @@
 ---
 title: "cran-comments"
 author: "Andreas Hill, Alexander Massey"
-date: "04 January 2021"
+date: "08 January 2021"
 ---
 
 
 ## First major release
 This is a submission of the first major release of our packag after having undergone an intense review process by the
 Journal of Statistical Software. 
-The DOI in the CITATION is for the new JSS publication that will be registered after publication on CRAN.
+The DOI in the CITATION is for the new JSS publication that will be registered after publication of the package-version 1.0.0 on CRAN.
 We included few code-refinements as result of the intense JSS-review of the code.
 
 ## Test environments
