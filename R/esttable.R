@@ -23,7 +23,7 @@
 #' @param sae an object of type \code{\link[base]{logical}}. Has to be set to \code{TRUE} if results of small area estimations are passed to \code{estTable}.
 #'        Defaults to \code{FALSE}.
 #'
-#' @param vartypes Specifiying the variances that should be included in the estimation table. Has to be specified as a \code{character} vector. The full set
+#' @param vartypes Specifying the variances that should be included in the estimation table. Has to be specified as a \code{character} vector. The full set
 #'                 contains \code{"variance"}, \code{"ext_variance"} and \code{"g_variance"}.
 #'
 #'

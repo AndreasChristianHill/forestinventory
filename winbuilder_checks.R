@@ -12,3 +12,10 @@ library(tools)
 tools::compactPDF(
   paths = "D:\\Daten_Dissertation\\vignette_forestinventory\\final_edit\\zeileis_edit_finalversion\\export_to_vignette\\forestinventory_vignette.pdf",
   gs_quality = "printer")
+
+# final
+devtools::spell_check()
+devtools::check_rhub()
+
+# release package:
+devtools::release()

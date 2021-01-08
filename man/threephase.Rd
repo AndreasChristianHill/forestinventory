@@ -129,7 +129,7 @@ The estimation method is available for \emph{simple} and \emph{cluster sampling}
 the special case where the first phase is based on an \emph{exhaustive} sample (i.e. a census).
 \emph{Small-area applications} are supported for synthetic estimation as well as two varieties
 of bias-corrected estimators: the traditional small-area estimator and an asymptotically
-equivalent version derived under Mandallaz's extended model approach.
+equivalent version derived under Mandallaz' extended model approach.
 }
 \details{
 \code{s1.id} identifies "second phase only" plots because the terrestrial phase is
@@ -141,7 +141,7 @@ equivalent version derived under Mandallaz's extended model approach.
          the model is biased in that small area.  The default, \code{small_area(..., unbiased=TRUE)}, allows for a residual
          correction by one of two asymptotically equivalent methods to create design-unbiased estimates:
          \itemize{
-             \item Mandallaz's extended model approach calculates the residual correction by extending the
+             \item Mandallaz' extended model approach calculates the residual correction by extending the
                    model formula with an indicator variable in the small area.  It is the default method
                    \code{psmall}=FALSE.
              \item the traditional small area estimator calculates the residual correction by taking the

@@ -3,7 +3,7 @@
 forestinventory
 ===============
 
-The R-package `forestinventory` adresses the current interest of
+The R-package `forestinventory` addresses the current interest of
 combining existing forest inventory data, which are derived by field
 surveys, with additional information sources such as remote sensing
 data. The major benefit of these so-called *multisource inventory

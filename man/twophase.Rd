@@ -89,7 +89,7 @@ An object of class \code{"twophase"} returns a \code{list} of the following comp
                    \item \code{r.squared} the R squared of the linear model
                    }}
  \item{samplesizes}{a \code{\link[base]{data.frame}} summarizing all samplesizes: in case of cluster sampling both,
-                    the number of individual plots and the nuber of clusters is reported.}
+                    the number of individual plots and the number of clusters is reported.}
  \item{coefficients}{the linear model coefficients}
  \item{cov_coef}{the design-based covariance matrix of the model coefficients}
  \item{Z_bar_1G}{the estimated auxiliary means of \code{formula} based on the first phase.
@@ -114,16 +114,16 @@ The estimation method is available for \emph{simple} and \emph{cluster sampling}
 the special case where the first phase is based on an \emph{exhaustive} sample (i.e. a census).
 \emph{Small-area applications} are supported for synthetic estimation as well as two varieties
 of bias-corrected estimators: the traditional small-area estimator and an asymptotically
-equivalent version derived under Mandallaz's extended model approach.
+equivalent version derived under Mandallaz' extended model approach.
 }
 \details{
 If estimations for multiple small-area domains should be computed, the domains have to be
          defined within a \code{character} vector using \code{c()}. Using \code{small_area(..., unbiased=FALSE)}
          calculates design-based estimates with the synthetic estimator and may be design-biased if
          the model is biased in that small area.  The default, \code{small_area(..., unbiased=TRUE)}, allows for a residual
-         correction by one of two asympototically equivalent methods to create design-unbiased estimates:
+         correction by one of two asymptotically equivalent methods to create design-unbiased estimates:
          \itemize{
-             \item Mandallaz's extended model approach calculates the residual correction by extending the
+             \item Mandallaz' extended model approach calculates the residual correction by extending the
                    model formula with an indicator variable in the small area.  It is the default method
                    \code{psmall}=FALSE.
              \item the traditional small area estimator calculates the residual correction by taking the

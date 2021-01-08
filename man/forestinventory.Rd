@@ -33,7 +33,7 @@ The Motivation of writing this package was to provide an extensive and consisten
 collection of state-of-the-art \emph{design-based} estimation techniques for forest inventories.
 It was especially designed to facilitate the application of the available estimators
 in forest practice as well as in scientifically related studies. The work on this
-package was also the trigger to complete the range of the allready published estimators,
+package was also the trigger to complete the range of the already published estimators,
 especially in the framework of three-phase smallarea estimators.
 }
 
