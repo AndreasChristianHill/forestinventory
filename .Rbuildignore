@@ -6,3 +6,4 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^winbuilder_checks\.R$
+^CRAN-RELEASE$
